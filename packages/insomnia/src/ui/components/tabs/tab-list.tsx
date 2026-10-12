@@ -406,7 +406,7 @@ export const OrganizationTabList = ({ showActiveStatus = true, currentPage = '' 
         onScroll={handleScroll}
       >
         <GridList
-          aria-label="Insomnia Tabs"
+          aria-label="Libresomnia Tabs"
           onSelectionChange={handleSelectionChange}
           selectedKeys={showActiveStatus && activeTabId ? [activeTabId] : []}
           disallowEmptySelection

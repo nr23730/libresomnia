@@ -10,7 +10,7 @@ export const AppHooks: FC = () => {
   useGlobalKeyboardShortcuts();
   useThemeChange();
   useCio();
-  // Used for detecting if we just updated Insomnia and app --args or insomnia:// and
+  // Used for detecting if we just updated Insomnia and app --args or libresomnia:// and
   useEffect(() => {
     setTimeout(() => window.main.halfSecondAfterAppStart(), 500);
   }, []);

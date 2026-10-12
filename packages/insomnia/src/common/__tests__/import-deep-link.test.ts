@@ -4,9 +4,9 @@ import { parseDeepLinkUrl, resolveImportDeepLink, sanitizeUrlAndExtractOrigin } 
 
 describe('parseDeepLinkUrl', () => {
   it('splits path from decoded params', () => {
-    const parsed = parseDeepLinkUrl('insomnia://app/import?mcp=' + encodeURIComponent('https://example.com/mcp?v=2'));
+    const parsed = parseDeepLinkUrl('libresomnia://app/import?mcp=' + encodeURIComponent('https://example.com/mcp?v=2'));
     expect(parsed).toEqual({
-      urlWithoutParams: 'insomnia://app/import',
+      urlWithoutParams: 'libresomnia://app/import',
       params: { mcp: 'https://example.com/mcp?v=2' },
     });
   });
@@ -15,13 +15,13 @@ describe('parseDeepLinkUrl', () => {
     expect(parseDeepLinkUrl('not-a-url')).toBeNull();
   });
 
-  it('normalizes insomniadev:// only in development', () => {
-    expect(parseDeepLinkUrl('insomniadev://app/import', true)?.urlWithoutParams).toBe('insomnia://app/import');
-    expect(parseDeepLinkUrl('insomniadev://app/import', false)?.urlWithoutParams).toBe('insomniadev://app/import');
+  it('normalizes libresomniadev:// only in development', () => {
+    expect(parseDeepLinkUrl('libresomniadev://app/import', true)?.urlWithoutParams).toBe('libresomnia://app/import');
+    expect(parseDeepLinkUrl('libresomniadev://app/import', false)?.urlWithoutParams).toBe('libresomniadev://app/import');
   });
 
   it('preserves param names verbatim', () => {
-    expect(parseDeepLinkUrl('insomnia://app/import?CuRl=x&operationId=listPets&sourceUrl=https://x')?.params).toEqual({
+    expect(parseDeepLinkUrl('libresomnia://app/import?CuRl=x&operationId=listPets&sourceUrl=https://x')?.params).toEqual({
       CuRl: 'x',
       operationId: 'listPets',
       sourceUrl: 'https://x',

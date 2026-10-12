@@ -54,6 +54,18 @@ const dataPath =
   process.env.INSOMNIA_DATA_PATH ||
   path.join(app.getPath('userData'), '../', isDevelopment() ? 'insomnia-app' : userDataFolder);
 
+// LOCAL BUILD (Libresomnia): migrate data from a previous Insomnia install once.
+try {
+  const fsSync = require('node:fs') as typeof import('node:fs');
+  const legacyPath = path.join(app.getPath('userData'), '../', 'Insomnia');
+  if (!fsSync.existsSync(dataPath) && fsSync.existsSync(legacyPath)) {
+    fsSync.cpSync(legacyPath, dataPath, { recursive: true });
+    console.log(`[main] Migrated data from ${legacyPath} to ${dataPath}`);
+  }
+} catch (err) {
+  console.warn('[main] Data migration from Insomnia failed', err);
+}
+
 app.setPath('userData', dataPath);
 
 initializeLogging();
@@ -168,7 +180,7 @@ app.on('ready', async () => {
 });
 
 // Set as default protocol
-const defaultProtocol = `insomnia${isDevelopment() ? 'dev' : ''}`;
+const defaultProtocol = `libresomnia${isDevelopment() ? 'dev' : ''}`;
 const fullDefaultProtocol = `${defaultProtocol}://`;
 let defaultProtocolSuccessful: boolean;
 if (isDevelopment()) {
@@ -249,7 +261,7 @@ const toOpenFolderDeepLink = async (rawPath: string): Promise<string | null> => 
     if (!stats.isDirectory()) {
       return null;
     }
-    return `insomnia://app/open-folder?path=${encodeURIComponent(rawPath)}`;
+    return `libresomnia://app/open-folder?path=${encodeURIComponent(rawPath)}`;
   } catch {
     return null;
   }

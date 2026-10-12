@@ -803,7 +803,7 @@ const ImportResourcesForm = ({
         <div>
           {errors && errors.length > 0 && (
             <div className="notice error margin-top-sm">
-              <Heading className="font-bold">Error while importing to Insomnia:</Heading>
+              <Heading className="font-bold">Error while importing to Libresomnia:</Heading>
               <p>{errors[0]}</p>
             </div>
           )}

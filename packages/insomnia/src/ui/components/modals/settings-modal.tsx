@@ -174,7 +174,7 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
             <BooleanSetting
               label="Enable proxy"
               setting="proxyEnabled"
-              help="If checked, enables a global network proxy on all requests sent through Insomnia. This proxy supports Basic Auth, digest, and NTLM authentication."
+              help="If checked, enables a global network proxy on all requests sent through Libresomnia. This proxy supports Basic Auth, digest, and NTLM authentication."
             />
 
             <div className="pt-4">
@@ -186,7 +186,7 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
                   { value: ProxyScopes.requests, name: 'Only when sending requests in Insomnia' },
                   { value: ProxyScopes.all, name: 'All traffic sent by Insomnia' },
                 ]}
-                help="When All traffic is selected, Insomnia uses the configured proxy for all calls, including login, git, auto-updates, etc."
+                help="When All traffic is selected, Libresomnia uses the configured proxy for all calls, including login, git, auto-updates, etc."
               />
             </div>
 

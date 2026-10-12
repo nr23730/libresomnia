@@ -680,14 +680,14 @@ export function createWindow(): ElectronBrowserWindow {
             return;
           }
           const { canceled, filePaths } = await dialog.showOpenDialog(window, {
-            title: 'Open folder in Insomnia',
+            title: 'Open folder in Libresomnia',
             buttonLabel: 'Open',
             properties: ['openDirectory'],
           });
           if (canceled || !filePaths[0]) {
             return;
           }
-          window.webContents.send('shell:open', `insomnia://app/open-folder?path=${encodeURIComponent(filePaths[0])}`);
+          window.webContents.send('shell:open', `libresomnia://app/open-folder?path=${encodeURIComponent(filePaths[0])}`);
         },
       },
     ],

@@ -78,7 +78,7 @@ export const GitProjectMigrationModal: FC<{
                 <div className="max-h-96 w-full overflow-x-hidden overflow-y-auto rounded-sm border border-solid border-(--hl-sm) select-none">
                   <Table
                     selectionMode="none"
-                    aria-label="Insomnia files"
+                    aria-label="Libresomnia files"
                     className="w-full table-fixed border-separate border-spacing-0"
                   >
                     <TableHeader>

@@ -28,7 +28,7 @@ export const GitRepoScanResult: FC<Props> = ({ initCloneGitRepositoryFetcher, in
   return (
     <>
       <div className="rounded border border-solid border-(--hl-sm) px-4 pt-4 text-left">
-        <h3 className="mb-2 text-lg font-bold text-(--color-font)">Insomnia files in repo</h3>
+        <h3 className="mb-2 text-lg font-bold text-(--color-font)">Libresomnia files in repo</h3>
         <p className="mb-4 text-(--hl)">{repoURI}</p>
         {initCloneGitRepositoryFetcher.state !== 'idle' ? (
           <div className="flex min-h-[134px] flex-col justify-center">

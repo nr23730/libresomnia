@@ -1,4 +1,4 @@
-const BINARY_PREFIX = 'Insomnia.Core';
+const BINARY_PREFIX = 'Libresomnia';
 // NOTE: USE_HARD_LINKS
 // https://github.com/electron-userland/electron-builder/issues/4594#issuecomment-574653870
 
@@ -8,12 +8,12 @@ const BINARY_PREFIX = 'Insomnia.Core';
  */
 const config = {
   npmRebuild: false,
-  appId: 'com.insomnia.app',
+  appId: 'de.backbord.libresomnia',
   protocols: [
     {
-      name: 'Insomnia',
+      name: 'Libresomnia',
       role: 'Viewer',
-      schemes: ['insomnia'],
+      schemes: ['libresomnia'],
     },
   ],
   files: [
@@ -158,13 +158,13 @@ const config = {
   linux: {
     // artifactName: `${BINARY_PREFIX}-\${version}-\${arch}.\${ext}`, // TODO-ARM64 - Re-enable when we have ARM64 build from insomnia-ee
     artifactName: `${BINARY_PREFIX}-\${version}.\${ext}`,
-    executableName: 'insomnia',
-    synopsis: 'The Collaborative API Client and Design Tool',
+    executableName: 'libresomnia',
+    synopsis: 'The Local-First API Client and Design Tool',
     category: 'Development',
     desktop: {
       entry: {
-        Name: 'Insomnia',
-        Comment: 'Insomnia is a cross-platform REST client, built on top of Electron.',
+        Name: 'Libresomnia',
+        Comment: 'Libresomnia is a local-first REST client, built on top of Electron.',
         Categories: 'Development',
         Keywords: 'GraphQL;REST;gRPC;SOAP;openAPI;GitOps;',
       },

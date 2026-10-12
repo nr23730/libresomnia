@@ -224,7 +224,7 @@ export const General: FC = () => {
         <BooleanSetting
           label="Clear OAuth 2 session on start"
           setting="clearOAuth2SessionOnRestart"
-          help="If checked, clears the OAuth session every time Insomnia is relaunched."
+          help="If checked, clears the OAuth session every time Libresomnia is relaunched."
         />
         <button
           className="pointer flex h-(--line-height-xs) items-center justify-center rounded-md border border-solid border-(--hl-lg) px-(--padding-sm) hover:bg-(--hl-xs)"
@@ -244,9 +244,9 @@ export const General: FC = () => {
 
       <div className="form-row pad-top-sm">
         <TextArraySetting
-          label="What folders can Insomnia access?"
+          label="What folders can Libresomnia access?"
           setting="dataFolders"
-          help="This allows you to control what folders Insomnia (and scripts within Insomnia) can read/write to."
+          help="This allows you to control what folders Libresomnia (and scripts within Libresomnia) can read/write to."
           placeholder="e.g., /Users/folder1"
         />
       </div>
@@ -288,7 +288,7 @@ export const General: FC = () => {
       <TextSetting
         label="Additional Plugin Path"
         setting="pluginPath"
-        help="Add a custom path to direct Insomnia to a different plugin directory."
+        help="Add a custom path to direct Libresomnia to a different plugin directory."
         placeholder="~/.insomnia:/other/path"
       />
 

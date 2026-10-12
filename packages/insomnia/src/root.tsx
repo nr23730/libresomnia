@@ -90,7 +90,7 @@ export const clientMiddleware: Route.ClientMiddlewareFunction[] = [locationHisto
 
 const parseDeepLinkUrl = (url: string) => parseImportDeepLinkUrl(url, isDevelopment());
 
-// Handles the auth/logout deep-link (insomnia://app/auth/login) independently
+// Handles the auth/logout deep-link (libresomnia://app/auth/login) independently
 // of the Root component so that it continues to work even when Root is replaced
 // by ErrorBoundary. Without this, an invalid session that causes an error before
 // Root mounts would leave the IPC listener unregistered, blocking the API-
@@ -105,7 +105,7 @@ const useAuthDeepLinkHandler = () => {
       if (!parsed) return;
       const { urlWithoutParams, params } = parsed;
 
-      if (urlWithoutParams === 'insomnia://app/auth/login') {
+      if (urlWithoutParams === 'libresomnia://app/auth/login') {
         if (params.message) {
           window.localStorage.setItem('logoutMessage', params.message);
         }
@@ -221,18 +221,18 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       ;
       default-src
             *
-            insomnia://*
+            libresomnia://*
       ;
       img-src
             blob:
             data:
             *
-            insomnia://*
+            libresomnia://*
       ;
       frame-src
             blob:
             *
-            insomnia://*
+            libresomnia://*
       ;
       script-src
             'self'
@@ -248,7 +248,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             data:
             mediastream:
             *
-            insomnia://*
+            libresomnia://*
       ;
       "
         />
@@ -394,10 +394,10 @@ const Root = () => {
       }
       const { urlWithoutParams, params } = parsed;
       // Handled by useAuthDeepLinkHandler (registered in both Root and ErrorBoundary)
-      if (urlWithoutParams === 'insomnia://app/auth/login') {
+      if (urlWithoutParams === 'libresomnia://app/auth/login') {
         return;
       }
-      if (urlWithoutParams === 'insomnia://app/alert') {
+      if (urlWithoutParams === 'libresomnia://app/alert') {
         return showModal(AlertModal, {
           title: params.title,
           message: params.message,
@@ -406,7 +406,7 @@ const Root = () => {
       // Open a local folder as a Git project (from the OS: Finder "Open With",
       // `insomnia /path/to/folder`, or this deep link). The main process has
       // already verified the path is an existing directory
-      if (urlWithoutParams === 'insomnia://app/open-folder') {
+      if (urlWithoutParams === 'libresomnia://app/open-folder') {
         const folderPath = params.path;
         if (!folderPath) {
           return;
@@ -443,7 +443,7 @@ const Root = () => {
         });
       }
       // Supports params: uri, mcp, curl, clipboard, file, origin, endpoint, operationId
-      if (urlWithoutParams === 'insomnia://app/import') {
+      if (urlWithoutParams === 'libresomnia://app/import') {
         // Clean up the flag set during deep-link replay so it never leaks
         // into later modal evaluations within the same session.
         window.sessionStorage.removeItem('suppressWelcomeModals');
@@ -483,7 +483,7 @@ const Root = () => {
           startedAt: Date.now(),
         });
       }
-      if (urlWithoutParams === 'insomnia://plugins/install') {
+      if (urlWithoutParams === 'libresomnia://plugins/install') {
         if (!params.name || params.name.trim() === '') {
           return showError({
             title: 'Plugin Install',
@@ -517,7 +517,7 @@ const Root = () => {
           },
         });
       }
-      if (urlWithoutParams === 'insomnia://plugins/theme') {
+      if (urlWithoutParams === 'libresomnia://plugins/theme') {
         const parsedTheme = JSON.parse(decodeURIComponent(params.theme));
         showModal(AskModal, {
           title: 'Install Theme',
@@ -544,8 +544,8 @@ const Root = () => {
         });
       }
       if (
-        urlWithoutParams === 'insomnia://oauth/github/authenticate' ||
-        urlWithoutParams === 'insomnia://oauth/github-app/authenticate'
+        urlWithoutParams === 'libresomnia://oauth/github/authenticate' ||
+        urlWithoutParams === 'libresomnia://oauth/github-app/authenticate'
       ) {
         const { code, state } = params;
         return gitProviderCompleteSignInSubmit({
@@ -554,7 +554,7 @@ const Root = () => {
           provider: 'github',
         });
       }
-      if (urlWithoutParams === 'insomnia://oauth/gitlab/authenticate') {
+      if (urlWithoutParams === 'libresomnia://oauth/gitlab/authenticate') {
         const { code, state } = params;
         return gitProviderCompleteSignInSubmit({
           code,
@@ -562,12 +562,12 @@ const Root = () => {
           provider: 'gitlab',
         });
       }
-      if (urlWithoutParams === 'insomnia://app/auth/finish') {
+      if (urlWithoutParams === 'libresomnia://app/auth/finish') {
         return authorizeSubmit({
           code: params.box,
         });
       }
-      if (urlWithoutParams === 'insomnia://app/open/organization') {
+      if (urlWithoutParams === 'libresomnia://app/open/organization') {
         // if user is logged out, navigate to authorize instead
         // gracefully handle open org in app from browser
         const userSession = await services.userSession.get();
@@ -579,7 +579,7 @@ const Root = () => {
         }
         return navigate(`/organization/${params.organizationId}`);
       }
-      if (urlWithoutParams === 'insomnia://system-browser-oauth/redirect') {
+      if (urlWithoutParams === 'libresomnia://system-browser-oauth/redirect') {
         const { url: redirectUrl, encryptedUrl: encryptedRedirectUrl, encryptedKey, iv } = params;
         if (redirectUrl) {
           return redirectToDefaultBrowserSubmit({
@@ -594,7 +594,7 @@ const Root = () => {
         }
         return;
       }
-      if (urlWithoutParams === 'insomnia://oauth/azure/authenticate') {
+      if (urlWithoutParams === 'libresomnia://oauth/azure/authenticate') {
         const { code, ...restParams } = params;
         if (code && typeof code === 'string') {
           const authResult = (await plugins.executePluginMainAction({
@@ -692,7 +692,7 @@ const Root = () => {
     }
   }, [openFolderFetcher.data, openFolderFetcher.state]);
 
-  // Replay a deep link that was queued before login (e.g. insomnia://app/import
+  // Replay a deep link that was queued before login (e.g. libresomnia://app/import
   // clicked while signed out).  We wait for organizationId so that the full
   // redirect chain (org → project) has settled and the import modal can read
   // route params.  For users with no projects yet the "-- New Project --"
@@ -749,7 +749,7 @@ const Root = () => {
       </div>
       <Modals />
       <AppHooks />
-      {/* triggered by insomnia://app/import */}
+      {/* triggered by libresomnia://app/import */}
       {importObject.startedAt && (
         <ImportModal
           key={importObject.startedAt}
