@@ -40,7 +40,7 @@ export async function clientLoader({ params }: LoaderFunctionArgs) {
 
   const { id: sessionId, accountId } = await services.userSession.get();
 
-  if (!sessionId) {
+  if (!models.organization.isLocalOrganizationId(organizationId) && !sessionId) {
     await logout();
     throw redirect(href('/auth/login'));
   }

@@ -889,9 +889,8 @@ const ProjectNavigationSidebarInner = (
               {isKonnectOrganization ? (
                 <KonnectSyncActionsRow {...konnectSyncBar} />
               ) : (
-                !isScratchPad && (
-                  <NewProjectButton onPress={onCreateProject} isDisabled={organizationProjects.length === 0} />
-                )
+                // LOCAL BUILD: local projects allowed in scratchpad organization
+                <NewProjectButton onPress={onCreateProject} isDisabled={organizationProjects.length === 0} />
               )}
             </div>
           )}
@@ -1217,7 +1216,8 @@ export const EmptyProjectNavigationSidebar = ({ onCreateProject }: { onCreatePro
     <div className="flex flex-1 flex-col overflow-hidden" data-testid="global-navigation-sidebar">
       <div className="flex justify-between gap-1 p-(--padding-sm)">
         <SidebarSearchField value="" isDisabled onChange={() => {}} />
-        {!isScratchPad && <NewProjectButton onPress={onCreateProject} />}
+        {/* LOCAL BUILD: local projects allowed in scratchpad organization */}
+        <NewProjectButton onPress={onCreateProject} />
       </div>
     </div>
   );
