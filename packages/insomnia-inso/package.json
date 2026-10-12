@@ -69,7 +69,5 @@
     "string-argv": "^0.3.2",
     "yaml": "^2.7.1"
   },
-  "optionalDependencies": {
-    "@kong/insomnia-plugin-external-vault": "0.1.5-dev.20260910023314"
-  }
+  "optionalDependencies": {}
 }
