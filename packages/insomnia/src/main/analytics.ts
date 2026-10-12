@@ -23,8 +23,13 @@ export function setCurrentOrganizationId(id: string | undefined): void {
   _currentOrganizationId = id;
 }
 
-const analytics = new InsomniaAnalytics({
-  writeKey: getSegmentWriteKey(),
+// LOCAL BUILD: the Segment SDK validates writeKey in its constructor at module-load time and
+// throws "writeKey is missing" when the key is blank (as in this build). Only construct the
+// client when a key is actually configured; telemetry is disabled anyway (see below).
+const segmentWriteKey = getSegmentWriteKey();
+const analytics = segmentWriteKey
+  ? new InsomniaAnalytics({
+  writeKey: segmentWriteKey,
   app: {
     appName: getProductName(),
     appVersion: getAppVersion(),
@@ -46,7 +51,8 @@ const analytics = new InsomniaAnalytics({
   onError: error => {
     console.warn('[analytics] Error sending analytics event', error);
   },
-});
+})
+  : null;
 
 const getDeviceId = async () => {
   const settings = await services.settings.get();
@@ -77,7 +83,7 @@ export async function trackAnalyticsEvent(event: AnalyticsEvent, properties?: Re
 
   try {
     const anonymousId = (await getDeviceId()) ?? '';
-    analytics.track({
+    analytics?.track({
       event,
       properties: {
         ...(_currentOrganizationId && { organization_id: _currentOrganizationId }),
@@ -124,7 +130,7 @@ export async function trackPageView(name: string) {
 
   try {
     const anonymousId = (await getDeviceId()) ?? '';
-    analytics.page({ name, anonymousId, userId: userSession?.hashedAccountId });
+    analytics?.page({ name, anonymousId, userId: userSession?.hashedAccountId });
 
     if (userSession?.id) {
       net.fetch(getApiBaseURL() + '/v1/telemetry/', {
