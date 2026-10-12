@@ -22,6 +22,8 @@ let identifiedUserId: string | null = null;
  * separate from the Segment `track()` pipeline in `main/analytics.ts`.
  */
 export function trackCioEvent(event: string, properties?: Record<string, unknown>): void {
+  // LOCAL BUILD: Customer.io telemetry disabled
+  return;
   if (!globalAnalyticsInstance || !identifiedUserId) {
     return;
   }
@@ -29,6 +31,8 @@ export function trackCioEvent(event: string, properties?: Record<string, unknown
 }
 
 export const useCio = () => {
+  // LOCAL BUILD: Customer.io SDK init disabled (no telemetry, no in-app messaging)
+  return;
   const { userSession } = useRootLoaderData()!;
   const lastIdentifiedUser = useRef<string | null>(null);
 

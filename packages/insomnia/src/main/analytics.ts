@@ -58,6 +58,10 @@ function hashString(input: string) {
 }
 
 export async function trackAnalyticsEvent(event: AnalyticsEvent, properties?: Record<string, any>) {
+  // LOCAL BUILD: telemetry fully disabled
+  if (true) {
+    return;
+  }
   if (PLAYWRIGHT_TEST) {
     return;
   }
@@ -100,6 +104,10 @@ export async function trackAnalyticsEvent(event: AnalyticsEvent, properties?: Re
 }
 
 export async function trackPageView(name: string) {
+  // LOCAL BUILD: telemetry fully disabled
+  if (true) {
+    return;
+  }
   if (PLAYWRIGHT_TEST) {
     return;
   }

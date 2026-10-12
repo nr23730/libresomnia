@@ -96,6 +96,11 @@ const quitAndInstallNsis = () => {
 };
 
 export const init = async () => {
+  // LOCAL BUILD: automatic updates disabled (no updates.insomnia.rest traffic)
+  ipcMainOn('getUpdateStatus', event => {
+    event.returnValue = currentUpdateStatus;
+  });
+  return;
   // nsis installer uses electron-updater package rather than electron.autoUpdater
   const isNsis = await isNsisInstaller();
   const checkForUpdates = isNsis ? initNsisUpdater() : initAutoUpdater();
