@@ -35,6 +35,8 @@ export const ScratchPadTutorialPanel = () => {
   };
 
   const shouldShowSignUpTip = useMemo(() => {
+    // LOCAL BUILD: sign-up tip removed
+    return false;
     if (!signUpTipDismissedState || !signUpTipDismissedState.dismissed) {
       return true;
     }

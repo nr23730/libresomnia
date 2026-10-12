@@ -11,6 +11,17 @@ import { createFetcherSubmitHook } from '~/ui/utils/router';
 
 import type { Route } from './+types/auth.login';
 
+// LOCAL BUILD: cloud login removed — /auth/login always lands in the local scratchpad
+export async function clientLoader() {
+  return redirect(
+    href('/organization/:organizationId/project/:projectId/workspace/:workspaceId/debug', {
+      organizationId: models.organization.SCRATCHPAD_ORGANIZATION_ID,
+      projectId: models.project.SCRATCHPAD_PROJECT_ID,
+      workspaceId: models.workspace.SCRATCHPAD_WORKSPACE_ID,
+    }),
+  );
+}
+
 const GoogleIcon = (props: React.ReactSVGElement['props']) => {
   return (
     <svg {...props} viewBox="0 0 22 22">
