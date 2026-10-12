@@ -20,7 +20,11 @@ export async function clientAction({ params }: Route.ClientActionArgs) {
 
   const user = await services.userSession.get();
   const sessionId = user.id;
-  invariant(sessionId, 'User must be logged in to delete a project');
+  // LOCAL BUILD: local (scratchpad) organizations have no session; only cloud projects need one.
+  const isLocalOrg = models.organization.isLocalOrganizationId(organizationId);
+  if (!isLocalOrg) {
+    invariant(sessionId, 'User must be logged in to delete a project');
+  }
 
   try {
     await projectLock.lock();
