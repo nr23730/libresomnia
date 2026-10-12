@@ -58,9 +58,11 @@ export default defineConfig(({ mode }) => {
 
     build: {
       target: 'esnext',
-      sourcemap: true,
+      sourcemap: false,
+      reportCompressedSize: false,
       rollupOptions: {
         external: ['@getinsomnia/node-libcurl'],
+        maxParallelFileOps: 2,
       },
     },
     optimizeDeps: {
