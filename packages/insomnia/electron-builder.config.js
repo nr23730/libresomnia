@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 const BINARY_PREFIX = 'Insomnia.Core';
 // NOTE: USE_HARD_LINKS
 // https://github.com/electron-userland/electron-builder/issues/4594#issuecomment-574653870
@@ -188,10 +189,16 @@ const config = {
     ],
   },
   rpm: {
+    // LOCAL BUILD: package name shown by dnf/rpm (defaults to package.json "name" = insomnia)
+    packageName: 'libresomnia',
     // Prevents RPM from packaging build-id metadata, some of which is the
     // same across all electron-builder applications, which causes package
     // conflicts
     fpm: ['--rpm-rpmbuild-define=_build_id_links none'],
+  },
+  deb: {
+    // LOCAL BUILD: same as rpm: package name shown by apt/dpkg
+    packageName: 'libresomnia',
   },
   snap: {
     base: 'core22',
