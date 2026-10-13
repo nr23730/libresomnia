@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { type CurrentPlan, type User } from 'insomnia-api';
 import type { Settings } from 'insomnia-data';
 import { models } from 'insomnia-data';
@@ -120,20 +121,8 @@ const NetworkAndSyncIndicator = ({ asyncTaskStatus, settings, sync }: IndicatorP
 };
 
 const ScratchPadAuthActions = () => (
-  <>
-    <NavLink
-      to={href('/auth/login')}
-      className="flex items-center justify-center gap-2 rounded-xs border border-solid border-(--hl-md) px-4 py-1 text-sm font-semibold text-(--color-font) ring-1 ring-transparent transition-all hover:bg-(--hl-xs) focus:ring-(--hl-md) focus:ring-inset aria-pressed:bg-(--hl-sm)"
-    >
-      Login
-    </NavLink>
-    <NavLink
-      className="flex items-center justify-center gap-2 rounded-xs bg-(--color-surprise) px-4 py-1 text-sm font-semibold text-(--color-font-surprise) ring-1 ring-transparent transition-all focus:bg-[rgba(var(--color-surprise-rgb),0.9)] focus:ring-(--hl-md) focus:ring-inset aria-pressed:bg-[rgba(var(--color-surprise-rgb),0.8)]"
-      to={href('/auth/login')}
-    >
-      Sign up for free
-    </NavLink>
-  </>
+  // LOCAL BUILD: cloud login/signup removed
+  <></>
 );
 
 const LoginUserActions = ({

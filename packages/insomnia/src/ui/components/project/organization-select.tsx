@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { CurrentPlan, Organization } from 'insomnia-api';
 import { models } from 'insomnia-data';
 import { Fragment, useEffect, useState } from 'react';
@@ -111,48 +112,7 @@ export const OrganizationSelect = ({
             )}
           </ListBox>
           <div className="my-1 border-t border-(--hl-sm)" />
-          <Button
-            className="flex h-(--line-height-xs) w-full items-center gap-2 bg-transparent px-(--padding-md) whitespace-nowrap text-(--color-font) transition-colors hover:bg-(--hl-sm) focus:bg-(--hl-xs) focus:outline-hidden"
-            onPress={() => {
-              setIsOpen(false);
-              window.main.openInBrowser(getLoginUrl());
-            }}
-          >
-            <Icon icon="sign-in-alt" />
-            <span>Join an organization</span>
-          </Button>
-          <Button
-            className="flex h-(--line-height-xs) w-full items-center gap-2 bg-transparent px-(--padding-md) whitespace-nowrap text-(--color-font) transition-colors hover:bg-(--hl-sm) focus:bg-(--hl-xs) focus:outline-hidden"
-            onPress={() => {
-              setIsOpen(false);
-              // If user is in the scratchpad workspace redirect them to the login page
-              if (isScratchpadWorkspace) {
-                return window.main.openInBrowser(getLoginUrl());
-              }
-
-              if (!currentPlan) {
-                return;
-              }
-
-              if (currentPlan.type === 'enterprise-member') {
-                // If user has a team or enterprise member plan show them an alert
-                showModal(AlertModal, {
-                  title: 'Cannot create new organization.',
-                  message:
-                    'Your Insomnia account is tied to the enterprise corporate account. Please ask the owner of the enterprise billing to create one for you.',
-                });
-              } else if (['free', 'individual'].includes(currentPlan.type)) {
-                // If user has a free or individual plan redirect them to the landing page
-                window.main.openInBrowser(`${getAppWebsiteBaseURL()}/app/landing-page`);
-              } else {
-                // If user has a team or enterprise plan redirect them to the create organization page
-                window.main.openInBrowser(`${getAppWebsiteBaseURL()}/app/dashboard/organizations?create_org=true`);
-              }
-            }}
-          >
-            <Icon icon="plus" />
-            <span>Create an organization</span>
-          </Button>
+          {/* LOCAL BUILD: cloud organization join/create buttons removed */}
         </Popover>
       </Select>
     </div>
