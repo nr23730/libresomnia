@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { session } from 'electron/main';
 import { models, services } from 'insomnia-data';
 import { ProxyScopes } from 'insomnia-data/common';
@@ -6,11 +7,9 @@ import {
   getAIServiceURL,
   getApiBaseURL,
   getAppWebsiteBaseURL,
-  getCioCdnUrl,
   getGitHubRestApiUrl,
   getKonnectApiUrl,
   getMockServiceURL,
-  getSentryDsn,
 } from '~/common/constants';
 import { setDefaultProtocol } from '~/common/utils/url/protocol';
 
@@ -43,18 +42,8 @@ function insomniaIntegrationHosts() {
     // scoped to just those requests rather than this session-wide bypass list.
     getGitHubRestApiUrl(),
 
-    // Analytics & error monitoring — main/analytics.ts (Segment, via net.fetch),
-    // main/sentry.ts (Sentry, via @sentry/electron's own net.request-based transport)
-    'https://api.segment.io',
-    getSentryDsn(),
-
-    // Customer.io — ui/hooks/use-cio.tsx's CDP client, plus the in-app messaging ("Gist")
-    // widget iframe and the Google Fonts it loads (see main/api.protocol.ts)
-    getCioCdnUrl(),
-    'https://renderer.gist.build',
-    'https://code.gist.build',
-    'https://fonts.googleapis.com',
-    'https://fonts.gstatic.com',
+    // LOCAL BUILD: analytics/Sentry/Customer.io proxy-bypass entries removed —
+    // no telemetry code path exists that could use them.
   ];
   return urls.flatMap(url => {
     try {

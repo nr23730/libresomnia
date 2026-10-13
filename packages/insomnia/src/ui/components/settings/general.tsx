@@ -1,4 +1,5 @@
-import { type HttpVersion, HttpVersions, isMac, strings, UpdateChannel } from 'insomnia-data/common';
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+import { type HttpVersion, HttpVersions, isMac, UpdateChannel } from 'insomnia-data/common';
 import React, { type FC, Fragment } from 'react';
 
 import { useRootLoaderData } from '~/root';
@@ -224,7 +225,7 @@ export const General: FC = () => {
         <BooleanSetting
           label="Clear OAuth 2 session on start"
           setting="clearOAuth2SessionOnRestart"
-          help="If checked, clears the OAuth session every time Insomnia is relaunched."
+          help="If checked, clears the OAuth session every time Libresomnia is relaunched."
         />
         <button
           className="pointer flex h-(--line-height-xs) items-center justify-center rounded-md border border-solid border-(--hl-lg) px-(--padding-sm) hover:bg-(--hl-xs)"
@@ -244,9 +245,9 @@ export const General: FC = () => {
 
       <div className="form-row pad-top-sm">
         <TextArraySetting
-          label="What folders can Insomnia access?"
+          label="What folders can Libresomnia access?"
           setting="dataFolders"
-          help="This allows you to control what folders Insomnia (and scripts within Insomnia) can read/write to."
+          help="This allows you to control what folders Libresomnia (and scripts within Libresomnia) can read/write to."
           placeholder="e.g., /Users/folder1"
         />
       </div>
@@ -288,25 +289,12 @@ export const General: FC = () => {
       <TextSetting
         label="Additional Plugin Path"
         setting="pluginPath"
-        help="Add a custom path to direct Insomnia to a different plugin directory."
+        help="Add a custom path to direct Libresomnia to a different plugin directory."
         placeholder="~/.insomnia:/other/path"
       />
 
-      {!isLoggedIn && (
-        <>
-          <h2 className="sticky top-0 left-0 z-10 bg-(--color-bg) pt-5 pb-2 text-lg font-bold">Network Activity</h2>
-          <BooleanSetting label="Send Anonymous Usage Statistics" setting="enableAnalytics" disabled={isLoggedIn} />
-          <div className="py-2 pl-5 text-sm opacity-50">
-            Help Kong improve its products by sending anonymous data about features and plugins used, hardware and
-            software configuration, statistics on number of requests, {strings.collection.plural.toLowerCase()},{' '}
-            {strings.document.plural.toLowerCase()}, etc.
-          </div>
-          <div className="py-2 pl-5 text-sm opacity-50">
-            Please note that this will not include personal data or any sensitive information, such as request data,
-            names, etc.
-          </div>
-        </>
-      )}
+      {/* LOCAL BUILD: "Send Anonymous Usage Statistics" (Network Activity section)
+          removed entirely — telemetry is disabled in this build anyway. */}
     </div>
   );
 };

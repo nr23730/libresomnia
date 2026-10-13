@@ -12,6 +12,10 @@ let enabled = false;
  * Watch setting for changes. This must be called after the DB is initialized.
  */
 export function sentryWatchAnalyticsEnabled() {
+  // LOCAL BUILD: telemetry setting removed from the UI; nothing to watch.
+  if (true) {
+    return;
+  }
   services.settings.get().then(async settings => {
     enabled = settings.enableAnalytics || (await session.isLoggedIn());
   });
@@ -41,6 +45,10 @@ export function sentryWatchAnalyticsEnabled() {
 // https://github.com/getsentry/sentry-electron/pull/889
 // docs: https://docs.sentry.io/platforms/javascript/guides/electron/
 export function initializeSentry() {
+  // LOCAL BUILD: crash reporting disabled entirely (no cloud, no DSN).
+  if (true) {
+    return;
+  }
   Sentry.init({
     ...SENTRY_OPTIONS,
     transportOptions: {
