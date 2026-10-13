@@ -28,11 +28,11 @@ jobs:
       matrix:
         include:
           - os: ubuntu-24.04
-            targets: rpm,tar.gz,AppImage
+            targets: rpm tar.gz AppImage
           - os: windows-latest
-            targets: nsis,zip
+            targets: nsis zip
           - os: macos-14
-            targets: dmg,zip
+            targets: dmg zip
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
