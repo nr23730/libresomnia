@@ -1,0 +1,15 @@
+Libresomnia
+Copyright 2026 The Libresomnia Authors
+
+This product includes software developed as part of the Kong/insomnia project
+(the "Insomnia API Client"), https://github.com/Kong/insomnia
+Copyright 2016-Present Kong Inc., licensed under the Apache License, Version 2.0.
+
+Libresomnia is a modified distribution of Kong/insomnia (upstream tag core@13.3.1).
+Cloud services, telemetry (Segment, Sentry, Customer.io), automatic updates and the
+proprietary @kong/* plugins have been removed; a local OpenAI-compatible AI plugin,
+a fully functional local (scratchpad) organization and the Libresomnia branding have
+been added. See README.md for the complete list of modifications.
+
+"Insomnia" is a trademark of Kong Inc. This project is not affiliated with,
+endorsed by, or sponsored by Kong Inc.
