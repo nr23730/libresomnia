@@ -1,4 +1,5 @@
 {
+  "_localBuild": "LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md",
   "name": "insomnia",
   "version": "13.3.1",
   "productName": "Insomnia",
@@ -218,10 +219,7 @@
     "typescript": "^5.8.3",
     "vite": "^7.1.3"
   },
-  "optionalDependencies": {
-    "@kong/insomnia-plugin-ai": "^1.0.11",
-    "@kong/insomnia-plugin-external-vault": "0.1.5-dev.20260910023314"
-  },
+  "optionalDependencies": {},
   "dev": {
     "dev-server-port": 3334
   },
