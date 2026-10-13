@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { models, services } from 'insomnia-data';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, Tooltip, TooltipTrigger } from 'react-aria-components';
@@ -155,8 +156,8 @@ export function useKonnectSyncBar({
               </div>
               <span className="text-(--hl)">→</span>
               <div className="flex items-center gap-1">
-                <img src={insomniaLogo} alt="Insomnia" className="h-5 w-5" />
-                <span className="text-sm font-medium">Insomnia</span>
+                <img src={insomniaLogo} alt="Libresomnia" className="h-5 w-5" />
+                <span className="text-sm font-medium">Libresomnia</span>
               </div>
             </div>
             <p className="text-sm text-(--hl)">

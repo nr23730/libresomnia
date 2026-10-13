@@ -1,11 +1,11 @@
 {
   "_localBuild": "LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md",
-  "name": "insomnia",
-  "appId": "com.insomnia.app",
-  "userDataFolder": "Insomnia",
-  "productName": "Insomnia",
-  "synopsis": "The Collaborative API Client and Design Tool",
-  "icon": "https://github.com/kong/insomnia/blob/develop/packages/insomnia/src/icons/icon.ico?raw=true",
+  "name": "libresomnia",
+  "appId": "de.backbord.libresomnia",
+  "userDataFolder": "Libresomnia",
+  "productName": "Libresomnia",
+  "synopsis": "The Local-First API Client and Design Tool",
+  "icon": "",
   "githubOrg": "Kong",
   "githubRepo": "insomnia",
   "segmentWriteKeys": {

@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { ImportSourceType } from './import';
 
 export interface ParsedDeepLink {
@@ -10,7 +11,7 @@ export const parseDeepLinkUrl = (url: string, isDevelopment = false): ParsedDeep
   try {
     parsedUrl = new URL(url);
   } catch {
-    console.log('[deep-link] Invalid args, expected insomnia://x/y/z', url);
+    console.log('[deep-link] Invalid args, expected libresomnia://x/y/z', url);
     return null;
   }
   let urlWithoutParams = url.slice(0, Math.max(0, url.indexOf('?'))) || url;
@@ -18,7 +19,7 @@ export const parseDeepLinkUrl = (url: string, isDevelopment = false): ParsedDeep
 
   // Normalize the dev protocol so the path matches the production switch cases
   if (isDevelopment) {
-    urlWithoutParams = urlWithoutParams.replace('insomniadev://', 'insomnia://');
+    urlWithoutParams = urlWithoutParams.replace('libresomniadev://', 'libresomnia://');
   }
   return { urlWithoutParams, params };
 };
@@ -73,7 +74,7 @@ export const resolveImportDeepLink = (params: Record<string, string>): ImportDee
     };
   }
 
-  // A bare param (e.g. `insomnia://app/import?clipboard`, or `?curl` with no
+  // A bare param (e.g. `libresomnia://app/import?clipboard`, or `?curl` with no
   // value) opens the Import modal with that tab selected, nothing pre-populated.
   for (const type of DEEP_LINK_SOURCE_ORDER) {
     if (findSourceParam(params, type) !== undefined) {

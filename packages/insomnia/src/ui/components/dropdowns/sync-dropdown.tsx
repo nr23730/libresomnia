@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 import type { Project, Workspace } from 'insomnia-data';
 import React, { type FC, Fragment, useCallback, useEffect, useState } from 'react';
@@ -350,7 +351,7 @@ export const SyncDropdown: FC<Props> = () => {
                 <div className="absolute -right-1 -bottom-1 size-[10px] rounded-full bg-(--color-surprise)" />
               )}
             </div>
-            <span className="flex-1 truncate">{syncError ? 'Error syncing with Insomnia Cloud' : currentBranch}</span>
+            <span className="flex-1 truncate">{syncError ? 'Error syncing with Libresomnia Cloud' : currentBranch}</span>
             <div className="flex shrink-0 items-center gap-1.5 text-xs text-(--color-font-secondary)">
               {isSyncing && <Icon icon="spinner" className="w-3 animate-spin" />}
               <div className="flex items-center gap-0.5 overflow-hidden">
@@ -396,7 +397,7 @@ export const SyncDropdown: FC<Props> = () => {
 
         <Popover className="max-w-lg min-w-max overflow-hidden" placement="top end" offset={8}>
           <Menu
-            aria-label="Insomnia Sync Menu"
+            aria-label="Libresomnia Sync Menu"
             selectionMode="single"
             disabledKeys={allSyncMenuActionList.filter(item => item.isDisabled).map(item => item.id)}
             onAction={key => {

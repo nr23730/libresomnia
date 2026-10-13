@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { CloudProviderCredential, CloudProviderName } from 'insomnia-data';
 import { models } from 'insomnia-data';
 import React, { useEffect, useState } from 'react';
@@ -240,7 +241,7 @@ export const CloudServiceCredentialList = () => {
             <NumberSetting
               label="Secret Cache Duration (min)"
               setting="vaultSecretCacheDuration"
-              help="Set how long external vault secrets are cached in Insomnia (minutes). Use 0 to disable caching. Click Reset Cache to clear all cached secrets."
+              help="Set how long external vault secrets are cached in Libresomnia (minutes). Use 0 to disable caching. Click Reset Cache to clear all cached secrets."
               min={0}
               max={720}
             />

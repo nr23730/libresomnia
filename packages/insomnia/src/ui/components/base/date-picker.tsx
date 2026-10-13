@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { DatePickerProps, DateValue, ValidationResult } from 'react-aria-components';
 import {
   Button,
@@ -29,7 +30,7 @@ export const DatePicker = <T extends DateValue>({
   ...props
 }: CustomDatePickerProps<T>) => {
   return (
-    <RaDatePicker aria-label="Insomnia Date Picker" {...props}>
+    <RaDatePicker aria-label="Libresomnia Date Picker" {...props}>
       <Group className="flex w-full items-center justify-between rounded-sm border border-solid border-(--hl-sm) px-2 py-1 data-invalid:border-(--color-danger)">
         <DateInput>{segment => <DateSegment segment={segment} />}</DateInput>
         <Button>
