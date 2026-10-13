@@ -1,4 +1,6 @@
-import { Analytics, type AnalyticsSettings } from '@segment/analytics-node';
+// LOCAL BUILD: the Segment SDK (@segment/analytics-node) has been removed from this
+// package entirely. InsomniaAnalytics remains as a no-op stub so existing call sites
+// keep compiling; nothing is sent anywhere.
 
 export interface AppContext {
   appName: string;
@@ -23,7 +25,7 @@ export interface PageOptions {
 export interface InsomniaAnalyticsOptions {
   writeKey: string;
   app: AppContext;
-  settings?: Omit<AnalyticsSettings, 'writeKey'>;
+  settings?: unknown;
   onError?: (error: unknown) => void;
 }
 
@@ -41,63 +43,22 @@ export function getNormalizedOsName(platform: NodeJS.Platform | string): string 
   }
 }
 
+// No-op stub: telemetry is removed in the local build. The class shape is kept
+// so call sites compile unchanged; no client is constructed and nothing is sent.
 export class InsomniaAnalytics {
-  private readonly client: Analytics;
-  private readonly app: AppContext;
-  private readonly onError: (error: unknown) => void;
-
-  constructor({ writeKey, app, settings, onError }: InsomniaAnalyticsOptions) {
-    this.client = new Analytics({ writeKey, ...settings });
-    this.app = app;
-    this.onError = onError ?? (() => {});
+  constructor(_options: InsomniaAnalyticsOptions) {
+    // no-op
   }
 
-  track({ event, properties, anonymousId, userId }: TrackOptions): void {
-    this.client.track(
-      {
-        event,
-        anonymousId,
-        userId: userId ?? '',
-        properties: { ...properties, platform: this.app.platform },
-        context: this.buildContext(),
-      },
-      error => {
-        if (error) {
-          this.onError(error);
-        }
-      },
-    );
+  track(_options: TrackOptions): void {
+    // no-op
   }
 
-  page({ name, anonymousId, userId }: PageOptions): void {
-    this.client.page(
-      {
-        name,
-        anonymousId,
-        userId: userId ?? '',
-        context: this.buildContext(),
-      },
-      error => {
-        if (error) {
-          this.onError(error);
-        }
-      },
-    );
+  page(_options: PageOptions): void {
+    // no-op
   }
 
-  async closeAndFlush(timeoutMs = 5000): Promise<void> {
-    try {
-      await this.client.closeAndFlush({ timeout: timeoutMs });
-    } catch (error) {
-      this.onError(error);
-    }
-  }
-
-  private buildContext() {
-    const osVersion = typeof this.app.osVersion === 'function' ? this.app.osVersion() : this.app.osVersion;
-    return {
-      app: { name: this.app.appName, version: this.app.appVersion },
-      os: { name: getNormalizedOsName(process.platform), version: osVersion },
-    };
+  async closeAndFlush(_timeoutMs = 5000): Promise<void> {
+    // no-op
   }
 }
