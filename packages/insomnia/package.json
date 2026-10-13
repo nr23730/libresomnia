@@ -2,7 +2,7 @@
   "_localBuild": "LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md",
   "name": "insomnia",
   "version": "13.4.0",
-  "productName": "Insomnia",
+  "productName": "Libresomnia",
   "private": true,
   "description": "The Collaborative API Design Tool",
   "homepage": "https://konghq.com",

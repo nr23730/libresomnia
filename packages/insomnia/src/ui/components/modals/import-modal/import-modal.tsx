@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import classNames from 'classnames';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { models } from 'insomnia-data';
@@ -824,7 +825,7 @@ const ImportResourcesForm = ({
         <div>
           {errors && errors.length > 0 && (
             <div className="notice error margin-top-sm">
-              <Heading className="font-bold">Error while importing to Insomnia:</Heading>
+              <Heading className="font-bold">Error while importing to Libresomnia:</Heading>
               <p>{errors[0]}</p>
             </div>
           )}

@@ -1,4 +1,3 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { type ProxyScope, ProxyScopes } from 'insomnia-data/common';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-aria-components';

@@ -1,5 +1,5 @@
 // LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
-const BINARY_PREFIX = 'Insomnia.Core';
+const BINARY_PREFIX = 'Libresomnia';
 // NOTE: USE_HARD_LINKS
 // https://github.com/electron-userland/electron-builder/issues/4594#issuecomment-574653870
 
@@ -9,12 +9,12 @@ const BINARY_PREFIX = 'Insomnia.Core';
  */
 const config = {
   npmRebuild: false,
-  appId: 'com.insomnia.app',
+  appId: 'de.backbord.libresomnia',
   protocols: [
     {
-      name: 'Insomnia',
+      name: 'Libresomnia',
       role: 'Viewer',
-      schemes: ['insomnia'],
+      schemes: ['libresomnia'],
     },
   ],
   files: [
@@ -168,13 +168,13 @@ const config = {
   linux: {
     // artifactName: `${BINARY_PREFIX}-\${version}-\${arch}.\${ext}`, // TODO-ARM64 - Re-enable when we have ARM64 build from insomnia-ee
     artifactName: `${BINARY_PREFIX}-\${version}.\${ext}`,
-    executableName: 'insomnia',
-    synopsis: 'The Collaborative API Client and Design Tool',
+    executableName: 'libresomnia',
+    synopsis: 'The Local-First API Client and Design Tool',
     category: 'Development',
     desktop: {
       entry: {
-        Name: 'Insomnia',
-        Comment: 'Insomnia is a cross-platform REST client, built on top of Electron.',
+        Name: 'Libresomnia',
+        Comment: 'Libresomnia is a local-first REST client, built on top of Electron.',
         Categories: 'Development',
         Keywords: 'GraphQL;REST;gRPC;SOAP;openAPI;GitOps;',
       },
@@ -198,7 +198,7 @@ const config = {
     ],
   },
   rpm: {
-    // LOCAL BUILD: package name shown by dnf/rpm (defaults to package.json "name" = insomnia)
+    // Package name shown by dnf/rpm (defaults to package.json "name" = insomnia)
     packageName: 'libresomnia',
     // Prevents RPM from packaging build-id metadata, some of which is the
     // same across all electron-builder applications, which causes package
@@ -206,7 +206,8 @@ const config = {
     fpm: ['--rpm-rpmbuild-define=_build_id_links none'],
   },
   deb: {
-    // LOCAL BUILD: same as rpm: package name shown by apt/dpkg
+    // same as rpm: package name shown by apt/dpkg (not currently a build target,
+    // but keep it consistent in case one is added)
     packageName: 'libresomnia',
   },
   snap: {

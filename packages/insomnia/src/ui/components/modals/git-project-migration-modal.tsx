@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { WorkspaceScope } from 'insomnia-data';
 import React, { type FC } from 'react';
 import {
@@ -78,7 +79,7 @@ export const GitProjectMigrationModal: FC<{
                 <div className="max-h-96 w-full overflow-x-hidden overflow-y-auto rounded-sm border border-solid border-(--hl-sm) select-none">
                   <Table
                     selectionMode="none"
-                    aria-label="Insomnia files"
+                    aria-label="Libresomnia files"
                     className="w-full table-fixed border-separate border-spacing-0"
                   >
                     <TableHeader>
