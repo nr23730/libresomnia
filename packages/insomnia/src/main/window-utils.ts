@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import fs from 'node:fs';
 import * as os from 'node:os';
 import path from 'node:path';
@@ -329,7 +330,8 @@ export function createWindow(): ElectronBrowserWindow {
       },
       {
         label: `${MNEMONIC_SYM}Changelog`,
-        click: () => shell.openExternal('https://github.com/Kong/insomnia/releases'),
+        // LOCAL BUILD: changelog/releases of the Libresomnia fork.
+        click: () => shell.openExternal('https://github.com/nr23730/libresomnia/releases'),
       },
       {
         type: 'separator',
@@ -562,7 +564,8 @@ export function createWindow(): ElectronBrowserWindow {
       {
         label: 'Show Software Bill of Materials',
         click: () => {
-          shell.openExternal('https://github.com/Kong/insomnia/releases');
+          // LOCAL BUILD: SBOM/releases of the Libresomnia fork.
+          shell.openExternal('https://github.com/nr23730/libresomnia/releases');
         },
       },
       {
@@ -724,14 +727,14 @@ export function createWindow(): ElectronBrowserWindow {
             return;
           }
           const { canceled, filePaths } = await dialog.showOpenDialog(window, {
-            title: 'Open folder in Insomnia',
+            title: 'Open folder in Libresomnia',
             buttonLabel: 'Open',
             properties: ['openDirectory'],
           });
           if (canceled || !filePaths[0]) {
             return;
           }
-          window.webContents.send('shell:open', `insomnia://app/open-folder?path=${encodeURIComponent(filePaths[0])}`);
+          window.webContents.send('shell:open', `libresomnia://app/open-folder?path=${encodeURIComponent(filePaths[0])}`);
         },
       },
     ],

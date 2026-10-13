@@ -3,7 +3,7 @@ import { type CurrentPlan, type User } from 'insomnia-api';
 import type { Settings } from 'insomnia-data';
 import { models } from 'insomnia-data';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Link, ToggleButton, Tooltip, TooltipTrigger } from 'react-aria-components';
+import { Button, ToggleButton, Tooltip, TooltipTrigger } from 'react-aria-components';
 import { href, NavLink, Outlet, useLocation, useNavigate, useParams } from 'react-router';
 import * as reactUse from 'react-use';
 
@@ -16,7 +16,7 @@ import { useUntrackedProjectsLoaderFetcher } from '~/routes/untracked-projects';
 import { AnalyticsEvent } from '~/ui/analytics';
 import { useEditorHistoryTabCleanup } from '~/ui/components/.client/codemirror/editor-history-cleanup';
 import { CommandPalette } from '~/ui/components/command-palette';
-import { GitHubStarsButton } from '~/ui/components/github-stars-button';
+// LOCAL BUILD: GitHubStarsButton import removed (star button taken out of the header).
 import { HeaderInviteButton } from '~/ui/components/header-invite-button';
 import { HeaderPlanIndicator } from '~/ui/components/header-plan-indicator';
 import { HeaderUserButton } from '~/ui/components/header-user-button';
@@ -312,7 +312,8 @@ const Component = () => {
                       </div>
                     )}
 
-                    {!user ? <GitHubStarsButton /> : null}
+                    {/* LOCAL BUILD: GitHub star button removed — it markets the
+                        upstream Kong repository, which is not this project. */}
                   </div>
                   <CommandPalette />
                   <div className="flex min-w-min items-center justify-end gap-(--padding-sm) space-x-3 p-2">
@@ -434,15 +435,7 @@ const Component = () => {
                           sync={syncOrgsAndProjects}
                         />
 
-                        <Link>
-                          <a
-                            className="flex items-center gap-1 px-(--padding-md) text-xs text-(--color-font) focus:underline focus:outline-hidden"
-                            href="https://konghq.com/"
-                          >
-                            Made with
-                            <Icon className="text-(--color-surprise-font)" icon="heart" /> by Kong
-                          </a>
-                        </Link>
+                        {/* LOCAL BUILD: "Made with ♥ by Kong" header link removed. */}
                       </div>
                     </div>
                   </div>
