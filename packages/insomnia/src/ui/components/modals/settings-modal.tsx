@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { type ProxyScope, ProxyScopes } from 'insomnia-data/common';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-aria-components';
@@ -55,7 +56,9 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
     const checkFeatures = async () => {
       const plugins = await pluginsBridge.getBundlePlugins();
       const aiPlugin = plugins.find(p => p.name === AI_PLUGIN_NAME);
-      setShouldShowAiSettingsTab(!!aiPlugin && !!userSession.id);
+      // LOCAL BUILD: no cloud session exists in the scratchpad organization; the
+      // presence of the bundled local AI plugin is the only gate needed.
+      setShouldShowAiSettingsTab(!!aiPlugin);
     };
     checkFeatures();
   }, [userSession.id, organizationId]);
@@ -174,7 +177,7 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
             <BooleanSetting
               label="Enable proxy"
               setting="proxyEnabled"
-              help="If checked, enables a global network proxy on all requests sent through Insomnia. This proxy supports Basic Auth, digest, and NTLM authentication."
+              help="If checked, enables a global network proxy on all requests sent through Libresomnia. This proxy supports Basic Auth, digest, and NTLM authentication."
             />
 
             <div className="pt-4">
@@ -186,7 +189,7 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
                   { value: ProxyScopes.requests, name: 'Only when sending requests in Insomnia' },
                   { value: ProxyScopes.all, name: 'All traffic sent by Insomnia' },
                 ]}
-                help="When All traffic is selected, Insomnia uses the configured proxy for all calls, including login, git, auto-updates, etc."
+                help="When All traffic is selected, Libresomnia uses the configured proxy for all calls, including login, git, auto-updates, etc."
               />
             </div>
 

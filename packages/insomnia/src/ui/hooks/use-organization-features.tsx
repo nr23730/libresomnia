@@ -5,13 +5,16 @@ import { useParams } from 'react-router';
 
 import { useServerQuery } from '~/ui/hooks/use-query';
 
+// LOCAL BUILD: the scratchpad organization has no backend to ask for features, so
+// the fallback must enable the AI features — the local AI plugin replaces the
+// proprietary Kong one and needs no paid plan.
 export const fallbackFeatures = Object.freeze<FeatureList>({
   bulkImport: { enabled: false, reason: 'Insomnia API unreachable' },
   gitSync: { enabled: false, reason: 'Insomnia API unreachable' },
   orgBasicRbac: { enabled: false, reason: 'Insomnia API unreachable' },
-  aiMockServers: { enabled: false, reason: 'Insomnia API unreachable' },
-  aiCommitMessages: { enabled: false, reason: 'Insomnia API unreachable' },
-  aiMcpClient: { enabled: false, reason: 'Insomnia API unreachable' },
+  aiMockServers: { enabled: true, reason: 'Local build: AI features enabled for local organizations' },
+  aiCommitMessages: { enabled: true, reason: 'Local build: AI features enabled for local organizations' },
+  aiMcpClient: { enabled: true, reason: 'Local build: AI features enabled for local organizations' },
 });
 
 // If network unreachable assume user has paid for the current period

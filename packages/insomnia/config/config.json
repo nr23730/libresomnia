@@ -24,10 +24,7 @@
   },
   "bundlePlugins": [
     {
-      "name": "@kong/insomnia-plugin-external-vault"
-    },
-    {
-      "name": "@kong/insomnia-plugin-ai"
+      "name": "libresomnia-plugin-ai"
     }
   ],
   "sentryDsn": ""
