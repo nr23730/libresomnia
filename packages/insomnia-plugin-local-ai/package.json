@@ -1,0 +1,12 @@
+{
+  "_localBuild": "LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md",
+  "name": "libresomnia-plugin-ai",
+  "version": "13.3.1",
+  "description": "Local AI plugin for Libresomnia: OpenAI-compatible chat completions for mock routes, commit messages and MCP sampling.",
+  "license": "Apache-2.0",
+  "author": "The Libresomnia Authors",
+  "main": "index.js",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
