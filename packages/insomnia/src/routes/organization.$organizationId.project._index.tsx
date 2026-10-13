@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { GitRepository, Project } from 'insomnia-data';
 import { models, services } from 'insomnia-data';
 import { useState } from 'react';
@@ -40,7 +41,7 @@ export async function clientLoader({ params }: LoaderFunctionArgs) {
 
   const { id: sessionId, accountId } = await services.userSession.get();
 
-  if (!sessionId) {
+  if (!models.organization.isLocalOrganizationId(organizationId) && !sessionId) {
     await logout();
     throw redirect(href('/auth/login'));
   }

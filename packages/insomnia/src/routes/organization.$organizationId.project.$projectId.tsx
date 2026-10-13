@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { getLearningFeature } from 'insomnia-api';
 import { models, services } from 'insomnia-data';
 import { useEffect, useRef, useState } from 'react';
@@ -33,7 +34,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const userSession = await services.userSession.get();
   const { id: sessionId, accountId } = userSession;
 
-  if (!models.project.isScratchpadProject({ _id: projectId }) && !sessionId) {
+  if (!models.organization.isLocalOrganizationId(organizationId) && !sessionId) {
     await logout();
     throw redirect(href('/auth/login'));
   }
