@@ -203,7 +203,9 @@ const config = {
     // Prevents RPM from packaging build-id metadata, some of which is the
     // same across all electron-builder applications, which causes package
     // conflicts
-    fpm: ['--rpm-rpmbuild-define=_build_id_links none'],
+    // --iteration = RPM release field; counts up with each libresomnia build
+    // of the same upstream version (matches the v<ver>+libresomnia.N tag).
+    fpm: ['--rpm-rpmbuild-define=_build_id_links none', '--iteration', '2'],
   },
   deb: {
     // same as rpm: package name shown by apt/dpkg (not currently a build target,
