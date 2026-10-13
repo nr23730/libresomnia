@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { MockServer } from 'insomnia-data';
 import {
   CONTENT_TYPE_FORM_URLENCODED,
@@ -350,7 +351,7 @@ export const sortOrderName: Record<SortOrder, string> = {
 };
 
 export const EXTERNAL_VAULT_PLUGIN_NAME = '@kong/insomnia-plugin-external-vault';
-export const AI_PLUGIN_NAME = '@kong/insomnia-plugin-ai';
+export const AI_PLUGIN_NAME = 'libresomnia-plugin-ai';
 
 export type DashboardSortOrder = 'name-asc' | 'name-desc' | 'created-asc' | 'created-desc' | 'modified-desc';
 
