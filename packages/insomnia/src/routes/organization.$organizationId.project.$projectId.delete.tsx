@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { deleteTeamProject, isApiError } from 'insomnia-api';
 import { models, services } from 'insomnia-data';
 import { href, redirect } from 'react-router';
@@ -20,7 +21,11 @@ export async function clientAction({ params }: Route.ClientActionArgs) {
 
   const user = await services.userSession.get();
   const sessionId = user.id;
-  invariant(sessionId, 'User must be logged in to delete a project');
+  // LOCAL BUILD: local (scratchpad) organizations have no session; only cloud projects need one.
+  const isLocalOrg = models.organization.isLocalOrganizationId(organizationId);
+  if (!isLocalOrg) {
+    invariant(sessionId, 'User must be logged in to delete a project');
+  }
 
   try {
     await projectLock.lock();
