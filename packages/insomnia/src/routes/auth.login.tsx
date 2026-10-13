@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { models } from 'insomnia-data';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-aria-components';
@@ -10,6 +11,17 @@ import { Tooltip } from '~/ui/components/tooltip';
 import { createFetcherSubmitHook } from '~/ui/utils/router';
 
 import type { Route } from './+types/auth.login';
+
+// LOCAL BUILD: cloud login removed — /auth/login always lands in the local scratchpad
+export async function clientLoader() {
+  return redirect(
+    href('/organization/:organizationId/project/:projectId/workspace/:workspaceId/debug', {
+      organizationId: models.organization.SCRATCHPAD_ORGANIZATION_ID,
+      projectId: models.project.SCRATCHPAD_PROJECT_ID,
+      workspaceId: models.workspace.SCRATCHPAD_WORKSPACE_ID,
+    }),
+  );
+}
 
 const GoogleIcon = (props: React.ReactSVGElement['props']) => {
   return (

@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { getOrgUserPermissions, type Permission } from 'insomnia-api';
 import { models } from 'insomnia-data';
 import React, { useEffect, useState } from 'react';
@@ -141,7 +142,7 @@ const MissingSomeoneModal = ({ isOpen, onClose }: any) => {
           className="flex-1 rounded-sm border border-solid border-(--hl-md) p-4 transition-colors hover:bg-(--hl-xs) focus:bg-(--hl-sm) focus:outline-hidden data-disabled:opacity-25 data-selected:border-(--color-surprise) data-selected:ring-2 data-selected:ring-(--color-surprise)"
         >
           <div className="flex items-center gap-2">
-            <Heading className="text-lg font-bold">To work together in Insomnia long-term</Heading>
+            <Heading className="text-lg font-bold">To work together in Libresomnia long-term</Heading>
           </div>
         </Radio>
         <Radio
