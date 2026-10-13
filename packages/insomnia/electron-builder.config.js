@@ -32,6 +32,15 @@ const config = {
       to: './bin',
       filter: 'yarn-standalone.js',
     },
+    // LOCAL BUILD: Apache-2.0 attribution for the upstream Kong/insomnia work
+    {
+      from: '../../NOTICE',
+      to: 'NOTICE',
+    },
+    {
+      from: '../../LICENSE',
+      to: 'LICENSE',
+    },
   ],
   extraMetadata: {
     main: 'entry.main.min.js', // Override the main path in package.json
