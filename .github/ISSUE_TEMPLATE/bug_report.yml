@@ -1,3 +1,4 @@
+# LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 name: Bug Report
 description: Report an Insomnia bug
 labels: [B-bug, S-unverified]
@@ -30,7 +31,7 @@ body:
     attributes:
       label: Is there an existing issue for this?
       options:
-        - label: I have searched the [issue tracker](https://www.github.com/Kong/insomnia/issues) for this problem.
+        - label: I have searched the [issue tracker](https://github.com/nr23730/libresomnia/issues) for this problem.
           required: true
   - type: checkboxes
     attributes:

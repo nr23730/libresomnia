@@ -1,0 +1,91 @@
+# LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+name: Release
+
+# Builds Libresomnia installers and attaches them to a GitHub Release.
+# Trigger: publish a release (tag e.g. v13.3.1) or run manually with a tag.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to build (e.g. v13.3.1)
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            targets: rpm,tar.gz,AppImage
+          - os: windows-latest
+            targets: nsis,zip
+          - os: macos-14
+            targets: dmg,zip
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --allow-git=all
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+
+      - name: Build app
+        working-directory: packages/insomnia
+        run: npm run build
+
+      - name: Package (Linux)
+        if: runner.os == 'Linux'
+        working-directory: packages/insomnia
+        run: |
+          sudo apt-get update && sudo apt-get install -y rpm
+          npx electron-builder build --config electron-builder.config.js --linux ${{ matrix.targets }}
+
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        working-directory: packages/insomnia
+        # customSign.js skips code signing when the SM_* secrets are absent
+        run: npx electron-builder build --config electron-builder.config.js --win ${{ matrix.targets }}
+
+      - name: Package (macOS, unsigned)
+        if: runner.os == 'macOS'
+        working-directory: packages/insomnia
+        # notarization disabled: requires Apple Developer credentials
+        run: npx electron-builder build --config electron-builder.config.js --mac ${{ matrix.targets }} -c.mac.notarize=false
+
+      - name: Upload artifacts to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name || github.event.inputs.tag }}
+        shell: bash
+        run: |
+          shopt -s nullglob
+          files=(packages/insomnia/dist/*.rpm packages/insomnia/dist/*.tar.gz packages/insomnia/dist/*.AppImage \
+                 packages/insomnia/dist/*.exe packages/insomnia/dist/*.zip packages/insomnia/dist/*.dmg)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No artifacts found" >&2
+            exit 1
+          fi
+          sha256sum "${files[@]}" > SHA256SUMS-${{ runner.os }}.txt
+          gh release upload "$TAG" "${files[@]}" SHA256SUMS-${{ runner.os }}.txt --clobber

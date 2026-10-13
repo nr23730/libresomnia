@@ -1,7 +1,8 @@
+# LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 blank_issues_enabled: true
 contact_links:
   - name: Feature Request
-    url: https://github.com/Kong/insomnia/discussions/categories/ideas
+    url: https://github.com/nr23730/libresomnia/discussions
     about: Search and submit ideas for this project
   - name: Question
     url: https://chat.insomnia.rest/
