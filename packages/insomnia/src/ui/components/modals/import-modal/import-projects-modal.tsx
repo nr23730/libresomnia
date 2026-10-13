@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import classnames from 'classnames';
 import { services } from 'insomnia-data';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
@@ -464,7 +465,7 @@ const ImportProjectsList = ({
               showModal(AlertModal, {
                 title: 'Cancel Import?',
                 message:
-                  'If you cancel now, Insomnia will finish importing the current folder then stop. You’ll be able to use projects that have already been imported. Do you wish to cancel?',
+                  'If you cancel now, Libresomnia will finish importing the current folder then stop. You’ll be able to use projects that have already been imported. Do you wish to cancel?',
                 addCancel: true,
                 onConfirm: onCancel,
               });

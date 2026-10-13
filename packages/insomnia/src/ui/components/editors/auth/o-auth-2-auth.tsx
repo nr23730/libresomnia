@@ -141,7 +141,7 @@ const getFields = (authentication: Extract<RequestAuthentication, { type: 'oauth
       property="redirectUrl"
       key="redirectUrl"
       help={
-        'This can be whatever you want or need it to be. Insomnia will automatically detect a redirect in the client browser window and extract the code from the redirected URL.'
+        'This can be whatever you want or need it to be. Libresomnia will automatically detect a redirect in the client browser window and extract the code from the redirected URL.'
       }
     />
   );

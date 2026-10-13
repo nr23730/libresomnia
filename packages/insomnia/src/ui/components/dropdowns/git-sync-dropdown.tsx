@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { IconName, IconProp } from '@fortawesome/fontawesome-svg-core';
 import type { GitRepository } from 'insomnia-data';
 import type { MergeConflict } from 'insomnia-vcs';
@@ -334,7 +335,7 @@ export const GitSyncDropdown: FC<Props> = ({ gitRepository, isInsomniaSyncEnable
     ? [
         {
           id: 'switch-to-git-repo',
-          label: 'Switch to Insomnia Sync',
+          label: 'Switch to Insomnia Sync (cloud)',
           icon: 'cloud',
           action: async () => {
             resetGitStatusFetcher.submit({

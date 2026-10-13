@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 const insomniaDocs = (slug: string) => `https://docs.insomnia.rest${slug}`;
 const newInsomniaDocs = (slug: string) => `https://developer.konghq.com/insomnia${slug}`;
 
@@ -32,7 +33,7 @@ export const docsGitAccessToken = {
 
 export const documentationLinks = {
   introductionToInsomnia: {
-    title: 'Introduction to Insomnia',
+    title: 'Introduction to Insomnia format',
     url: docsIntroductionInsomnia,
   },
   workingWithDesignDocs: {
