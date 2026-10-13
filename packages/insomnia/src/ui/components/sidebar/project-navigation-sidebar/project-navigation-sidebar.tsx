@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { useVirtualizer } from '@tanstack/react-virtual';
 import type { StorageRules } from 'insomnia-api';
 import type { CollectionWorkspaceChildren, RequestGroup, Workspace } from 'insomnia-data';
@@ -957,7 +958,8 @@ const ProjectNavigationSidebarInner = (
               {isKonnectOrganization ? (
                 <KonnectSyncActionsRow {...konnectSyncBar} />
               ) : (
-                !isScratchPadOrganization && <NewProjectButton onPress={onCreateProject} />
+                // LOCAL BUILD: local projects allowed in scratchpad organization
+                <NewProjectButton onPress={onCreateProject} isDisabled={organizationProjects.length === 0} />
               )}
             </div>
           )}

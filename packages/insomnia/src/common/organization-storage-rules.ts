@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { getOrganizationStorageRule, type StorageRules } from 'insomnia-api';
 import { models, services } from 'insomnia-data';
 
@@ -22,7 +23,7 @@ export async function fetchAndCacheOrganizationStorageRule(
     return {
       enableCloudSync: false,
       enableLocalVault: true,
-      enableGitSync: false,
+      enableGitSync: true,
       isOverridden: false,
     };
   }

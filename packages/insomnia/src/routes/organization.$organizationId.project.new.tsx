@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { createTeamProject, isApiError, updateGitProjectCount } from 'insomnia-api';
 import { models, services } from 'insomnia-data';
 import { href, redirect } from 'react-router';
@@ -62,10 +63,15 @@ export const reportGitProjectCount = async (organizationId: string, sessionId: s
 const createProjectImpl = async (organizationId: string, newProjectData: CreateProjectData) => {
   const user = await services.userSession.get();
   const sessionId = user.id;
-  invariant(sessionId, 'User must be logged in to create a project');
+  // LOCAL BUILD: session only required for cloud organizations
+  if (!models.organization.isLocalOrganizationId(organizationId)) {
+    invariant(sessionId, 'User must be logged in to create a project');
+  }
   invariant(
-    newProjectData.storageType === 'local' || !models.organization.isLocalOrganizationId(organizationId),
-    'Only local projects can be created in this organization',
+    newProjectData.storageType === 'local' ||
+      newProjectData.storageType === 'git' ||
+      !models.organization.isLocalOrganizationId(organizationId),
+    'Only local and git projects can be created in this organization',
   );
 
   if (newProjectData.storageType === 'local') {
