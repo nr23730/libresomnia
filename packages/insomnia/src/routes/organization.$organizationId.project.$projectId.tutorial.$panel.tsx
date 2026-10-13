@@ -1,9 +1,14 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import { Button } from 'react-aria-components';
-import { href, useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
+import { useState } from 'react';
 
+import { useProjectLoaderData } from '~/routes/organization.$organizationId.project.$projectId';
 import { ErrorBoundary } from '~/ui/components/error-boundary';
 import { Icon } from '~/ui/components/icon';
+import { NewWorkspaceModal } from '~/ui/components/modals/new-workspace-modal';
+import { useOrganizationStorageRule } from '~/ui/hooks/use-organization-storage-rule';
 
 export const scratchPadTutorialList: {
   id: string;
@@ -47,16 +52,29 @@ export const scratchPadTutorialList: {
   },
 ];
 
+// LOCAL BUILD: the tutorial panels used to gate creation behind "Sign up to create X"
+// and linked to /auth/login. With the cloud removed, the buttons open the real
+// create dialogs (NewWorkspaceModal) for the matching scope instead.
+const tutorialIdToScope: Record<string, 'collection' | 'mcp' | 'mock-server' | 'environment'> = {
+  collection: 'collection',
+  mcp: 'mcp',
+  'mock-server': 'mock-server',
+  environment: 'environment',
+};
+
 const TutorialContent = ({ panel }: { panel?: string }) => {
   const selectedTutorial = scratchPadTutorialList.find(t => t.id === panel);
-  const navigate = useNavigate();
-  const handleSignUp = () => {
-    navigate(href('/auth/login'));
-  };
+  const { organizationId } = useParams() as { organizationId?: string };
+  const projectData = useProjectLoaderData();
+  const storageRules = useOrganizationStorageRule(organizationId ?? '');
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   if (!selectedTutorial) {
     return null;
   }
+
+  const scope = tutorialIdToScope[selectedTutorial.id];
+  const canCreate = !!projectData?.activeProject && !!scope;
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center p-8 text-center">
@@ -66,10 +84,11 @@ const TutorialContent = ({ panel }: { panel?: string }) => {
 
         <div className="mb-8 space-y-4">
           <Button
-            onPress={handleSignUp}
-            className="rounded-md bg-(--color-surprise) px-6 py-2 text-white transition-colors"
+            onPress={() => canCreate && setIsCreateOpen(true)}
+            isDisabled={!canCreate}
+            className="rounded-md bg-(--color-surprise) px-6 py-2 text-white transition-colors disabled:opacity-50"
           >
-            Sign Up to create {selectedTutorial.name}
+            Create {selectedTutorial.name}
           </Button>
         </div>
       </div>
@@ -85,6 +104,20 @@ const TutorialContent = ({ panel }: { panel?: string }) => {
           <Icon icon="external-link" className="h-3 w-3" />
         </Button>
       </div>
+
+      {canCreate && projectData?.activeProject && (
+        <NewWorkspaceModal
+          // LOCAL BUILD: remount per panel — NewWorkspaceModal initializes its
+          // scope/name state in useState, so reusing the instance across panels
+          // would keep showing the previously opened dialog type.
+          key={selectedTutorial.id}
+          isOpen={isCreateOpen}
+          onOpenChange={setIsCreateOpen}
+          project={projectData.activeProject}
+          storageRules={storageRules}
+          scope={scope}
+        />
+      )}
     </div>
   );
 };
