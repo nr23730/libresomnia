@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -58,9 +59,11 @@ export default defineConfig(({ mode }) => {
 
     build: {
       target: 'esnext',
-      sourcemap: true,
+      sourcemap: false,
+      reportCompressedSize: false,
       rollupOptions: {
         external: ['@getinsomnia/node-libcurl'],
+        maxParallelFileOps: 2,
       },
     },
     optimizeDeps: {
