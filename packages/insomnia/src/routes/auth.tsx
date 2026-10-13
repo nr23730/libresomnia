@@ -1,5 +1,6 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { useEffect, useState } from 'react';
-import { Button, Link, Tooltip, TooltipTrigger } from 'react-aria-components';
+import { Button, Tooltip, TooltipTrigger } from 'react-aria-components';
 import { Outlet } from 'react-router';
 
 import { useRootLoaderData } from '~/root';
@@ -97,15 +98,7 @@ const Component = () => {
                   : 'You are offline. Connect to sync your data.'}
               </Tooltip>
             </TooltipTrigger>
-            <Link>
-              <a
-                className="flex items-center gap-1 px-(--padding-md) text-xs text-(--color-font) focus:underline focus:outline-hidden"
-                href="https://konghq.com/"
-              >
-                Made with
-                <Icon className="text-(--color-surprise-font)" icon="heart" /> by Kong
-              </a>
-            </Link>
+            {/* LOCAL BUILD: "Made with ♥ by Kong" link removed. */}
           </div>
         </div>
       </div>
