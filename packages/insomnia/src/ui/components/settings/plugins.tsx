@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import React, { type FC, useEffect, useMemo, useState } from 'react';
 import {
   Button,
@@ -142,8 +143,8 @@ export const Plugins: FC = () => {
   return (
     <div>
       <p className="notice info no-margin-top">
-        Plugins are built and maintained by third-party developers. Thank you! Insomnia does not review, endorse, or
-        support any particular plugin unless explicitly noted. Plugins are still an experimental feature. See{' '}
+        Plugins are built and maintained by third-party developers. Thank you! Libresomnia does not review, endorse,
+        or support any particular plugin unless explicitly noted. Plugins are still an experimental feature. See{' '}
         <Link href={docsPlugins}>Documentation</Link> for more info.
       </p>
 
@@ -232,7 +233,7 @@ export const Plugins: FC = () => {
                         ...state,
                         ...idleState,
                         error: err,
-                        installPluginErrMsg: `Failed to install ${npmPluginValue}. Please contact the plugin author sharing the below stack trace to help them to ensure compatibility with the latest Insomnia.`,
+                        installPluginErrMsg: `Failed to install ${npmPluginValue}. Please contact the plugin author sharing the below stack trace to help them to ensure compatibility with the latest Libresomnia.`,
                       }));
                     }
                   }}
@@ -698,7 +699,7 @@ export const Plugins: FC = () => {
                               </div>
                             )}
                             <div data-testid={`plugin-description-${plugin.name}`} className="text-(--hl) italic">
-                              {plugin.description || 'A non-descriptive Insomnia plugin.'}
+                              {plugin.description || 'A non-descriptive Libresomnia plugin.'}
                             </div>
                             <div data-testid={`plugin-permissions-${plugin.name}`}>
                               <span className="font-bold text-(--hl-xl)">Permissions</span>

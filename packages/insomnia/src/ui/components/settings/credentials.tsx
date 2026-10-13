@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 import type { GitCredentials, GitCredentialsV2, GitRemoteProviderType, ProviderEmail } from 'insomnia-data';
 import { models } from 'insomnia-data';
@@ -36,7 +37,7 @@ import { Input } from '~/ui/components/base/input';
 import { GitCustomCredentialForm } from '~/ui/components/git-credentials/git-custom-credential-form';
 import { showModal } from '~/ui/components/modals';
 import { AlertModal } from '~/ui/components/modals/alert-modal';
-import { CloudServiceCredentialList } from '~/ui/components/settings/cloud-service-credentials';
+// LOCAL BUILD: CloudServiceCredentialList import removed (cloud credentials section gone).
 
 const { isGitCredentialsV2, isOAuthCredential } = models.gitCredentials;
 
@@ -706,7 +707,8 @@ export const CredentialsSettings = () => {
   return (
     <div data-testid="credentials-settings-tab">
       <GitCredentialsList />
-      <CloudServiceCredentialList />
+      {/* LOCAL BUILD: cloud service credentials section removed — it required the
+          proprietary @kong external-vault plugin and an enterprise plan. */}
     </div>
   );
 };
