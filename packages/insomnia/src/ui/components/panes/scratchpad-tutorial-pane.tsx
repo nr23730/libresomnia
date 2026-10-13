@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { useMemo, useState } from 'react';
 import { Button, GridList, GridListItem } from 'react-aria-components';
 import { href, useNavigate, useParams } from 'react-router';
@@ -35,6 +36,8 @@ export const ScratchPadTutorialPanel = () => {
   };
 
   const shouldShowSignUpTip = useMemo(() => {
+    // LOCAL BUILD: sign-up tip removed
+    return false;
     if (!signUpTipDismissedState || !signUpTipDismissedState.dismissed) {
       return true;
     }
