@@ -1,16 +1,13 @@
 import type { Settings } from 'insomnia-data';
 import { services } from 'insomnia-data';
 
-import { AnalyticsEvent } from '~/ui/analytics';
 import { createFetcherSubmitHook } from '~/ui/utils/router';
 
 import type { Route } from './+types/settings.update';
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const patch = (await request.json()) as Partial<Settings>;
-  if ('enableAnalytics' in patch && !patch.enableAnalytics) {
-    window.main.trackAnalyticsEvent({ event: AnalyticsEvent.analyticsDisabled });
-  }
+  // LOCAL BUILD: analytics fully removed — no analyticsDisabled event on opt-out.
   await services.settings.patch(patch);
   return null;
 }

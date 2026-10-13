@@ -3,6 +3,10 @@ import * as Sentry from '@sentry/electron/renderer';
 import { SENTRY_OPTIONS } from '../common/sentry';
 
 export function initializeSentry() {
+  // LOCAL BUILD: renderer crash reporting/tracing disabled entirely.
+  if (true) {
+    return;
+  }
   Sentry.init({
     ...SENTRY_OPTIONS,
     // enable sentry tracing
