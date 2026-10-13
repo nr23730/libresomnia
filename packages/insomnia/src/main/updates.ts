@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -96,6 +97,11 @@ const quitAndInstallNsis = () => {
 };
 
 export const init = async () => {
+  // LOCAL BUILD: automatic updates disabled (no updates.insomnia.rest traffic)
+  ipcMainOn('getUpdateStatus', event => {
+    event.returnValue = currentUpdateStatus;
+  });
+  return;
   // nsis installer uses electron-updater package rather than electron.autoUpdater
   const isNsis = await isNsisInstaller();
   const checkForUpdates = isNsis ? initNsisUpdater() : initAutoUpdater();
