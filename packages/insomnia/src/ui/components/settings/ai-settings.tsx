@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { useCallback, useEffect, useState } from 'react';
 import { Button, Switch } from 'react-aria-components';
 
@@ -197,7 +198,7 @@ export const AISettings = () => {
       <div className="rounded-md border border-solid border-(--hl-sm) bg-(--hl-xs) p-4">
         <div className="mb-8">
           <h3 className="text-lg font-semibold text-(--color-font)">Activate an LLM</h3>
-          <p className="text-sm text-(--hl)">The LLM set to active will be used with Insomnia AI features</p>
+          <p className="text-sm text-(--hl)">The LLM set to active will be used with Libresomnia AI features</p>
         </div>
         <div className="flex flex-row gap-8">
           <div className="flex flex-col gap-2">

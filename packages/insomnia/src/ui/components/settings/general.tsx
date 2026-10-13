@@ -1,4 +1,3 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { type HttpVersion, HttpVersions, isMac, UpdateChannel } from 'insomnia-data/common';
 import React, { type FC, Fragment } from 'react';
 

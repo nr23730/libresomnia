@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { type FC, useEffect } from 'react';
 
 import { useCio } from '../hooks/use-cio';
@@ -10,7 +11,7 @@ export const AppHooks: FC = () => {
   useGlobalKeyboardShortcuts();
   useThemeChange();
   useCio();
-  // Used for detecting if we just updated Insomnia and app --args or insomnia:// and
+  // Used for detecting if we just updated Insomnia and app --args or libresomnia:// and
   useEffect(() => {
     setTimeout(() => window.main.halfSecondAfterAppStart(), 500);
   }, []);

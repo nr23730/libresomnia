@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { BaseModel, MockRoute, Request } from 'insomnia-data';
 import { models, services } from 'insomnia-data';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -406,7 +407,7 @@ export const OrganizationTabList = ({ showActiveStatus = true, currentPage = '' 
         onScroll={handleScroll}
       >
         <GridList
-          aria-label="Insomnia Tabs"
+          aria-label="Libresomnia Tabs"
           onSelectionChange={handleSelectionChange}
           selectedKeys={showActiveStatus && activeTabId ? [activeTabId] : []}
           disallowEmptySelection
