@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { useEffect, useRef } from 'react';
 
 import { Icon } from '../../icon';
@@ -43,8 +44,8 @@ export const SidebarFocusOnboarding = ({ triggerElement, onDismiss }: SidebarFoc
         </button>
       </div>
       <p className="mt-2 text-sm text-(--hl)">
-        Insomnia now automatically narrows the sidebar to the collection you're working on. Click the back arrow at the
-        top to return, or turn this off anytime in Preferences with the{' '}
+        Libresomnia now automatically narrows the sidebar to the collection you're working on. Click the back arrow at
+        the top to return, or turn this off anytime in Preferences with the{' '}
         <span className="font-bold text-(--color-font)">Sidebar focus for collections</span> setting.
       </p>
       <button

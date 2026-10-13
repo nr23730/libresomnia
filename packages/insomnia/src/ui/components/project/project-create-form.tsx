@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { StorageRules } from 'insomnia-api';
 import type { GitCredentials } from 'insomnia-data';
 import type { FC } from 'react';
@@ -306,7 +307,7 @@ export const ProjectCreateForm: FC<Props> = ({
                 <div className="flex flex-col gap-2 px-0.5">
                   <Label className="text-sm text-(--color-font)">Folder</Label>
                   <p className="text-xs">
-                    Insomnia will open this folder as a Git project. If it isn't a git repository yet, one will be
+                    Libresomnia will open this folder as a Git project. If it isn't a git repository yet, one will be
                     initialized.
                   </p>
                   <div className="flex items-center gap-2">

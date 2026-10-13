@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { StorageRules } from 'insomnia-api';
 import type { ApiSpec, Project, Workspace, WorkspaceScope } from 'insomnia-data';
 import { models } from 'insomnia-data';
@@ -571,7 +572,7 @@ export const NewWorkspaceModal = ({
                             <div className="group relative">
                               <Icon icon="info-circle" className="cursor-help text-(--hl)" />
                               <div className="absolute top-full left-1/2 z-10 mt-2 hidden w-72 -translate-x-1/2 rounded-md border border-(--hl-sm) bg-(--color-bg) p-3 text-xs text-(--color-font) shadow-lg group-hover:block">
-                                Insomnia can generate a mock server that will use liquid templates in the mock response
+                                Libresomnia can generate a mock server that will use liquid templates in the mock response
                                 bodies. These templates can be used to dynamically populate response data using request
                                 data and/or faker functions.
                               </div>

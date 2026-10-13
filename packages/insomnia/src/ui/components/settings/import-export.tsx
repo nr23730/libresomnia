@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { format } from 'date-fns';
 import { getProductName } from 'insomnia/src/common/constants';
 import { getWorkspaceLabel } from 'insomnia/src/common/get-workspace-label';
@@ -97,7 +98,7 @@ const showSaveExportedFileDialog = async ({
   const lastDir = window.localStorage.getItem('insomnia.lastExportPath');
   const dir = lastDir || window.app.getPath('desktop');
   const options = {
-    title: 'Export Insomnia Data',
+    title: 'Export Libresomnia Data',
     buttonLabel: 'Export',
     defaultPath: `${window.path.join(dir, `${name}_${date}`)}.${selectedFormat}`,
   };
@@ -109,7 +110,7 @@ const showSaveExportedFolderDialog = async () => {
   const lastDir = window.localStorage.getItem('insomnia.lastExportPath');
   const dir = lastDir || window.app.getPath('desktop');
   const options = {
-    title: 'Export Insomnia Data',
+    title: 'Export Libresomnia Data',
     buttonLabel: 'Export',
     properties: ['openDirectory'],
     defaultPath: dir,
@@ -312,7 +313,7 @@ export const exportRequestsToFile = (workspaceId: string, requestIds: string[]) 
         shouldExportPrivateEnvironments = await showExportPrivateEnvironmentsModal();
       }
       const fileName = await showSaveExportedFileDialog({
-        exportedFileNamePrefix: 'Insomnia',
+        exportedFileNamePrefix: 'Libresomnia',
         selectedFormat,
       });
 
@@ -708,7 +709,7 @@ export const ImportExport: FC<Props> = ({ hideSettingsModal, onModalChange }) =>
           const { filePaths, canceled } = await window.dialog.showOpenDialog({
             properties: ['openDirectory', 'createDirectory', 'promptToCreate'],
             buttonLabel: 'Select',
-            title: 'Export All Insomnia Data',
+            title: 'Export All Libresomnia Data',
           });
 
           if (canceled) {
@@ -777,7 +778,7 @@ export const ImportExport: FC<Props> = ({ hideSettingsModal, onModalChange }) =>
                 const { filePaths, canceled } = await window.dialog.showOpenDialog({
                   properties: ['openDirectory', 'createDirectory', 'promptToCreate'],
                   buttonLabel: 'Select',
-                  title: 'Export All Insomnia Data',
+                  title: 'Export All Libresomnia Data',
                 });
 
                 if (canceled) {

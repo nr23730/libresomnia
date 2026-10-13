@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { type HttpVersion, HttpVersions, isMac, UpdateChannel } from 'insomnia-data/common';
 import React, { type FC, Fragment } from 'react';
 
@@ -289,7 +290,7 @@ export const General: FC = () => {
         label="Additional Plugin Path"
         setting="pluginPath"
         help="Add a custom path to direct Libresomnia to a different plugin directory."
-        placeholder="~/.insomnia:/other/path"
+        placeholder="~/.libresomnia:/other/path"
       />
 
       {/* LOCAL BUILD: "Send Anonymous Usage Statistics" (Network Activity section)

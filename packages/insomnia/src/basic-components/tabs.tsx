@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import type { TabListProps, TabProps, TabsProps } from 'react-aria-components';
 import { Collection, Tab as RaTab, TabList, TabPanel, Tabs as RaTabs } from 'react-aria-components';
 import { twMerge } from 'tailwind-merge';
@@ -36,7 +37,7 @@ export const Tabs = ({ items, ...props }: CustomTabsProps<TabItem>) => {
     <RaTabs className="flex data-[orientation=horizontal]:flex-col data-[orientation=vertical]:flex-row" {...props}>
       <TabList
         className="flex border-(--hl-md) data-[orientation=horizontal]:mb-2 data-[orientation=horizontal]:border-b data-[orientation=vertical]:mr-2 data-[orientation=vertical]:flex-col data-[orientation=vertical]:border-r"
-        aria-label="Insomnia tabs"
+        aria-label="Libresomnia tabs"
         items={items}
       >
         {item => (
