@@ -53,6 +53,9 @@ jobs:
 
       - name: Build app
         working-directory: packages/insomnia
+        # react-router build needs more than the default Node heap (~4 GB)
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
         run: npm run build
 
       - name: Package (Linux)
