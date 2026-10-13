@@ -1,3 +1,4 @@
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
 import { DEBOUNCE_MILLIS } from './constants';
 
 interface Header {
@@ -152,7 +153,7 @@ export function unescapeForwardSlash(str: string): string {
   });
 }
 
-export const SECURITY_SETTINGS_PATH_LABEL = 'Insomnia Preferences → General → Security';
+export const SECURITY_SETTINGS_PATH_LABEL = 'Libresomnia Preferences → General → Security';
 
 export function cannotAccessPathError(accessingPath: string): string {
   return __IS_RENDERER__
