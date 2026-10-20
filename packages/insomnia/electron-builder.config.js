@@ -155,7 +155,7 @@ const config = {
     uninstallerIcon: './build/icon.ico',
     createDesktopShortcut: true,
     createStartMenuShortcut: true,
-    shortcutName: 'Insomnia',
+    shortcutName: 'Libresomnia',
     deleteAppDataOnUninstall: false,
   },
   squirrelWindows: {
