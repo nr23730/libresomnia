@@ -7,10 +7,12 @@ import { useServerQuery } from '~/ui/hooks/use-query';
 
 // LOCAL BUILD: the scratchpad organization has no backend to ask for features, so
 // the fallback must enable the AI features — the local AI plugin replaces the
-// proprietary Kong one and needs no paid plan.
+// proprietary Kong one and needs no paid plan. Git sync is enabled as well:
+// it only talks to the user's own git remotes, never to Kong infrastructure
+// (fixes #1 — the paid-plan banner must not appear in a cloud-free build).
 export const fallbackFeatures = Object.freeze<FeatureList>({
   bulkImport: { enabled: false, reason: 'Insomnia API unreachable' },
-  gitSync: { enabled: false, reason: 'Insomnia API unreachable' },
+  gitSync: { enabled: true, reason: 'Local build: Git sync works against your own git remotes' },
   orgBasicRbac: { enabled: false, reason: 'Insomnia API unreachable' },
   aiMockServers: { enabled: true, reason: 'Local build: AI features enabled for local organizations' },
   aiCommitMessages: { enabled: true, reason: 'Local build: AI features enabled for local organizations' },
