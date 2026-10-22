@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v13.3.1+libresomnia.4 - 2026-10-22
+
+### Libresomnia 13.3.1 — build 4
+
+Based on upstream Kong/insomnia `core@13.3.1` (Apache-2.0). Cloud login, telemetry (Segment/Sentry/Customer.io) and auto-updates removed; local AI plugin included.
+
+#### Changes in this build
+
+- **Git sync enabled for local organizations** (fixes #1): the "Git Sync limited to organizations of 3 or fewer users" paid-plan banner no longer appears. Git sync only ever talks to your own git remotes (GitHub, Gitea, bare repositories, …) and never to Kong infrastructure, so the plan restriction does not apply to this cloud-free build.
+- Platforms: Linux x86_64 + aarch64 (rpm, AppImage, tar.gz), Windows x64 + arm64 (NSIS installer, zip), macOS arm64 (dmg, zip)
+- SHA256SUMS files are provided per OS and architecture
+
 ## v13.3.1+libresomnia.3 - 2026-10-22
 
 ### Libresomnia 13.3.1 — build 3
@@ -603,9 +615,11 @@ Existing Windows installations from build 1/2 keep the old shortcut name until r
 ### :bug: Bug Fixes
 
 - [`df0a791`](https://github.com/Kong/insomnia/commit/df0a79194143dc615310ecc0976381c538f695f2) - re-initialize the parameter editor state when switching between requests *(PR [#7005](https://github.com/Kong/insomnia/pull/7005) by [@gatzjames](https://github.com/gatzjames))*
+  
   - :arrow*lower_right: _fixes issue [#7000](undefined) opened by [@jwarner112](https://github.com/jwarner112)*
   
 - [`3fceccf`](https://github.com/Kong/insomnia/commit/3fceccfdf691a0f3d7592f31120030eeff92be61) - **workspace**: Add default name for when creating a workspace *(PR [#7046](https://github.com/Kong/insomnia/pull/7046) by [@gatzjames](https://github.com/gatzjames))*
+  
 
 ### :wrench: Chores
 
