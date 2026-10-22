@@ -144,7 +144,7 @@ const config = {
     generateUpdatesFilesForAllChannels: true,
   },
   nsis: {
-    artifactName: `${BINARY_PREFIX}-nsis-\${version}.\${ext}`,
+    artifactName: `${BINARY_PREFIX}-nsis-\${version}-\${arch}.\${ext}`,
     include: './scripts/nsisInstall.nsh',
     oneClick: false,
     selectPerMachineByDefault: true,
@@ -166,8 +166,7 @@ const config = {
     artifactName: `${BINARY_PREFIX}-\${version}-portable.\${ext}`,
   },
   linux: {
-    // artifactName: `${BINARY_PREFIX}-\${version}-\${arch}.\${ext}`, // TODO-ARM64 - Re-enable when we have ARM64 build from insomnia-ee
-    artifactName: `${BINARY_PREFIX}-\${version}.\${ext}`,
+    artifactName: `${BINARY_PREFIX}-\${version}-\${arch}.\${ext}`,
     executableName: 'libresomnia',
     synopsis: 'The Local-First API Client and Design Tool',
     category: 'Development',
