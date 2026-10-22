@@ -72,19 +72,19 @@ jobs:
         working-directory: packages/insomnia
         run: |
           sudo apt-get update && sudo apt-get install -y rpm
-          npx electron-builder build --config electron-builder.config.js --linux --${{ matrix.arch }} ${{ matrix.targets }}
+          npx electron-builder build --config electron-builder.config.js --linux ${{ matrix.targets }} --${{ matrix.arch }}
 
       - name: Package (Windows)
         if: runner.os == 'Windows'
         working-directory: packages/insomnia
         # customSign.js skips code signing when the SM_* secrets are absent
-        run: npx electron-builder build --config electron-builder.config.js --win --${{ matrix.arch }} ${{ matrix.targets }}
+        run: npx electron-builder build --config electron-builder.config.js --win ${{ matrix.targets }} --${{ matrix.arch }}
 
       - name: Package (macOS, unsigned)
         if: runner.os == 'macOS'
         working-directory: packages/insomnia
         # notarization disabled: requires Apple Developer credentials
-        run: npx electron-builder build --config electron-builder.config.js --mac --${{ matrix.arch }} ${{ matrix.targets }} -c.mac.notarize=false
+        run: npx electron-builder build --config electron-builder.config.js --mac ${{ matrix.targets }} --${{ matrix.arch }} -c.mac.notarize=false
 
       - name: Upload artifacts to release
         env:
