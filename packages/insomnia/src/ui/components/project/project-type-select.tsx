@@ -29,13 +29,8 @@ export const ProjectTypeSelect = ({ value, onChange, storageRules }: Props) => {
       description: 'For working alone with data stored on your machine.',
       isDisabled: !storageRules.enableLocalVault,
     },
-    {
-      type: 'remote',
-      icon: 'globe',
-      name: 'Cloud Sync',
-      description: 'Out of the box collaboration with data stored securely to the cloud.',
-      isDisabled: !storageRules.enableCloudSync,
-    },
+    // LOCAL BUILD: 'remote' (Cloud Sync) removed — this build has no Insomnia
+    // cloud backend, so the option could never work.
     {
       type: 'git',
       icon: ['fab', 'git-alt'],
