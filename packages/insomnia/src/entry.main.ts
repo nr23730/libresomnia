@@ -105,9 +105,49 @@ app.on('web-contents-created', (_, contents) => {
   }
 });
 
+// LOCAL BUILD: clear Chromium caches once per app build (see call site). The
+// app version stays constant across libresomnia.N builds, so the bundle's
+// modification time is used as the "did the binary change" signal.
+const clearCachesIfAppUpdated = async () => {
+  try {
+    const markerPath = path.join(app.getPath('userData'), '.last-cache-cleared-build');
+    let currentBuild = '';
+    try {
+      currentBuild = String((await fs.stat(app.getAppPath())).mtimeMs);
+    } catch {
+      // development mode or unreadable bundle: skip cache maintenance
+      return;
+    }
+    let lastBuild = '';
+    try {
+      lastBuild = (await fs.readFile(markerPath, 'utf8')).trim();
+    } catch {
+      // no marker yet (first run after upgrade from a pre-marker build)
+    }
+    if (lastBuild === currentBuild) {
+      return;
+    }
+    log.info('[cache] app bundle changed, clearing code and HTTP caches');
+    // empty urls list = clear the whole code cache directory
+    await session.defaultSession.clearCodeCaches({ urls: [] });
+    await session.defaultSession.clearCache();
+    await fs.writeFile(markerPath, currentBuild, 'utf8');
+  } catch (err) {
+    // never block startup on cache maintenance
+    log.warn(`[cache] clearing caches failed: ${err}`);
+  }
+};
+
 // When the app is first launched
 app.on('ready', async () => {
   registerElectronHandlers();
+  // LOCAL BUILD: after an in-place update (e.g. `rpm -U`), Chromium's code/HTTP
+  // cache can keep serving the previous build's renderer assets, so UI changes
+  // only appeared after deleting the whole ~/.config/Libresomnia folder. On the
+  // first launch of a new app version, clear just the caches — user data,
+  // database and plugins are untouched. (Same staleness can occur on Windows
+  // and macOS; this runs on every platform.)
+  await clearCachesIfAppUpdated();
   // @TODO - Maybe move the register stuff in the registerMainHandlers function
   registerMainHandlers();
   registerPathHandlers();
