@@ -18,8 +18,12 @@ interface Props {
 }
 export const ProjectTypeWarning = ({ isGitSyncEnabled, storageType, storageRules }: Props) => {
   const isLightTheme = useIsLightTheme();
+  // LOCAL BUILD: only show the storage-restriction banner when an organization
+  // owner actually overrode the rules. The local build's default rules disable
+  // cloud sync (there is no cloud), which must not be reported as an owner mandate.
   const showStorageRestrictionMessage =
-    !storageRules.enableCloudSync || !storageRules.enableLocalVault || !storageRules.enableGitSync;
+    storageRules.isOverridden &&
+    (!storageRules.enableCloudSync || !storageRules.enableLocalVault || !storageRules.enableGitSync);
   const organizations = useOrganizations();
   const { organizationId } = useParams() as { organizationId: string };
   const organization = organizations.find(o => o.id === organizationId);
