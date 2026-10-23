@@ -204,7 +204,7 @@ const config = {
     // conflicts
     // --iteration = RPM release field; counts up with each libresomnia build
     // of the same upstream version (matches the v<ver>+libresomnia.N tag).
-    fpm: ['--rpm-rpmbuild-define=_build_id_links none', '--iteration', '4'],
+    fpm: ['--rpm-rpmbuild-define=_build_id_links none', '--iteration', '5'],
   },
   deb: {
     // same as rpm: package name shown by apt/dpkg (not currently a build target,
