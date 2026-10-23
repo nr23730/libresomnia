@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v13.3.1+libresomnia.5 - 2026-10-23
+
+### Libresomnia 13.3.1 — build 5
+
+Based on upstream Kong/insomnia `core@13.3.1` (Apache-2.0). Cloud login, telemetry (Segment/Sentry/Customer.io) and auto-updates removed; local AI plugin included.
+
+#### Changes in this build
+
+- **Cloud Sync option removed** from the new-project dialog and project settings — this cloud-free build has no Insomnia backend, so the option could never work. Local Vault and Git Sync remain.
+- **Fixed misleading "organization owner mandates" banner**: it appeared whenever any storage rule was disabled (including the local build's own cloud-sync default), even though a local organization has no owner. It now only appears for actual owner overrides.
+- **Caches are cleared automatically after an update**: previously, in-place updates could keep serving the previous build's UI from Chromium's code cache until the whole userData folder was deleted manually. Now the code and HTTP caches are cleared once on the first launch after the app bundle changed — user data, database and plugins are untouched. Applies to all platforms.
+- Platforms: Linux x86_64 + aarch64 (rpm, AppImage, tar.gz), Windows x64 + arm64 (NSIS installer, zip), macOS arm64 (dmg, zip)
+- SHA256SUMS files are provided per OS and architecture
+
 ## v13.3.1+libresomnia.4 - 2026-10-22
 
 ### Libresomnia 13.3.1 — build 4
