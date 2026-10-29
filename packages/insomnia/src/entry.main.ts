@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import fsSync from 'node:fs';
 import inspector from 'node:inspector';
 import { arch, release } from 'node:os';
 import path from 'node:path';
@@ -105,49 +106,60 @@ app.on('web-contents-created', (_, contents) => {
   }
 });
 
-// LOCAL BUILD: clear Chromium caches once per app build (see call site). The
-// app version stays constant across libresomnia.N builds, so the bundle's
-// modification time is used as the "did the binary change" signal.
-const clearCachesIfAppUpdated = async () => {
+// LOCAL BUILD: clear Chromium caches once per app build. The app version
+// stays constant across libresomnia.N builds, so the bundle's modification
+// time is used as the "did the binary change" signal.
+//
+// IMPORTANT: this must run synchronously BEFORE app 'ready'. Chromium's HTTP
+// cache is memory-mapped once the network context initializes, and
+// session.clearCache() called after 'ready' does not reliably evict entries
+// that keep serving a stale index.html (which then references the previous
+// build's hashed assets). Deleting the cache directories on disk before
+// Chromium starts is the same thing the user used to do manually by removing
+// the whole ~/.config/Libresomnia folder — but only touches caches; the
+// database, settings and plugins are untouched.
+const clearCachesIfAppUpdated = () => {
   try {
-    const markerPath = path.join(app.getPath('userData'), '.last-cache-cleared-build');
+    const userData = app.getPath('userData');
+    const markerPath = path.join(userData, '.last-cache-cleared-build');
     let currentBuild = '';
     try {
-      currentBuild = String((await fs.stat(app.getAppPath())).mtimeMs);
+      currentBuild = String(fsSync.statSync(app.getAppPath()).mtimeMs);
     } catch {
       // development mode or unreadable bundle: skip cache maintenance
       return;
     }
     let lastBuild = '';
     try {
-      lastBuild = (await fs.readFile(markerPath, 'utf8')).trim();
+      lastBuild = fsSync.readFileSync(markerPath, 'utf8').trim();
     } catch {
       // no marker yet (first run after upgrade from a pre-marker build)
     }
     if (lastBuild === currentBuild) {
       return;
     }
-    log.info('[cache] app bundle changed, clearing code and HTTP caches');
-    // empty urls list = clear the whole code cache directory
-    await session.defaultSession.clearCodeCaches({ urls: [] });
-    await session.defaultSession.clearCache();
-    await fs.writeFile(markerPath, currentBuild, 'utf8');
+    log.info('[cache] app bundle changed, removing stale cache directories');
+    for (const dir of ['Cache', 'Code Cache', 'GPUCache', 'Shared Dictionary', 'blob_storage']) {
+      try {
+        fsSync.rmSync(path.join(userData, dir), { recursive: true, force: true });
+      } catch {
+        // directory may not exist or be locked; not fatal
+      }
+    }
+    fsSync.writeFileSync(markerPath, currentBuild, 'utf8');
   } catch (err) {
     // never block startup on cache maintenance
     log.warn(`[cache] clearing caches failed: ${err}`);
   }
 };
+// Run at module load, before app 'ready' (see comment above).
+clearCachesIfAppUpdated();
 
 // When the app is first launched
 app.on('ready', async () => {
   registerElectronHandlers();
-  // LOCAL BUILD: after an in-place update (e.g. `rpm -U`), Chromium's code/HTTP
-  // cache can keep serving the previous build's renderer assets, so UI changes
-  // only appeared after deleting the whole ~/.config/Libresomnia folder. On the
-  // first launch of a new app version, clear just the caches — user data,
-  // database and plugins are untouched. (Same staleness can occur on Windows
-  // and macOS; this runs on every platform.)
-  await clearCachesIfAppUpdated();
+  // LOCAL BUILD: cache maintenance runs at module load, before 'ready'
+  // (see clearCachesIfAppUpdated definition).
   // @TODO - Maybe move the register stuff in the registerMainHandlers function
   registerMainHandlers();
   registerPathHandlers();
