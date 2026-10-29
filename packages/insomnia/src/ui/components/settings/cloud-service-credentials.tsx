@@ -1,4 +1,4 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.4.0) - see README.md
 import type { CloudProviderCredential, CloudProviderName } from 'insomnia-data';
 import { models } from 'insomnia-data';
 import React, { useEffect, useState } from 'react';

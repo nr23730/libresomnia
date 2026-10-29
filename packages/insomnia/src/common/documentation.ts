@@ -1,4 +1,4 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.4.0) - see README.md
 const insomniaDocs = (slug: string) => `https://docs.insomnia.rest${slug}`;
 const newInsomniaDocs = (slug: string) => `https://developer.konghq.com/insomnia${slug}`;
 

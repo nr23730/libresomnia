@@ -1,4 +1,4 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.4.0) - see README.md
 import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 import type { Project, Workspace } from 'insomnia-data';
 import React, { type FC, Fragment, useCallback, useEffect, useState } from 'react';

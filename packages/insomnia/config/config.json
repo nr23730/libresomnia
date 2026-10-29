@@ -1,5 +1,5 @@
 {
-  "_localBuild": "LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md",
+  "_localBuild": "LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.4.0) - see README.md",
   "name": "libresomnia",
   "appId": "de.backbord.libresomnia",
   "userDataFolder": "Libresomnia",

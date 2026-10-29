@@ -11,8 +11,8 @@ runs 100% offline; the only network traffic is what you explicitly configure
 
 ## What was changed compared to upstream
 
-Based on upstream tag `core@13.3.1`. All changes are maintained as individual
-commits on branches `local/<version>` (e.g. `local/13.3.1`). Every modified
+Based on upstream tag `core@13.4.0`. All changes are maintained as individual
+commits on branches `local/<version>` (e.g. `local/13.4.0`). Every modified
 source file carries a
 `LOCAL BUILD` comment marking it as changed relative to upstream.
 
@@ -75,7 +75,7 @@ running on the Qwen3.8-Flash-Next model.
 
 [Apache License 2.0](LICENSE) (same as upstream), © Kong Inc. for the
 upstream portions. This distribution is an original work based on
-Kong/insomnia `core@13.3.1`. Attribution is provided via the [NOTICE](NOTICE)
+Kong/insomnia `core@13.4.0`. Attribution is provided via the [NOTICE](NOTICE)
 file (also shipped inside the installed package), and every modified file is
 marked with a `LOCAL BUILD` comment as required under section 4(b) of the
 license.

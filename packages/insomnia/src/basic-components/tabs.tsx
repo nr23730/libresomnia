@@ -1,4 +1,4 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.4.0) - see README.md
 import type { TabListProps, TabProps, TabsProps } from 'react-aria-components';
 import { Collection, Tab as RaTab, TabList, TabPanel, Tabs as RaTabs } from 'react-aria-components';
 import { twMerge } from 'tailwind-merge';
