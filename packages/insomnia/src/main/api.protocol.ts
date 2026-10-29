@@ -140,10 +140,23 @@ export async function registerInsomniaProtocols() {
       const url = new URL(request.url);
       if (url.hostname === 'insomnia-app.local') {
         const rootDir = path.resolve(__dirname, 'client');
-        const filePath = path.join(rootDir, url.pathname.startsWith('/assets') ? url.pathname : 'index.html');
+        const isIndex = !url.pathname.startsWith('/assets');
+        const filePath = path.join(rootDir, isIndex ? 'index.html' : url.pathname);
         console.log(`Loading index for: ${url.pathname} from: ${filePath}`);
 
-        return await net.fetch(`file://${filePath}`, { bypassCustomProtocolHandlers: true });
+        const response = await net.fetch(`file://${filePath}`, { bypassCustomProtocolHandlers: true });
+        if (isIndex) {
+          // LOCAL BUILD: index.html has the same URL across app builds; without
+          // no-store Chromium heuristically caches it and keeps serving the
+          // previous build after an in-place update. Hashed asset filenames
+          // change per build, so only the entry document needs this.
+          return new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: { ...Object.fromEntries(response.headers.entries()), 'Cache-Control': 'no-store' },
+          });
+        }
+        return response;
       }
 
       // Allow Google Fonts to bypass the custom https protocol handler.
