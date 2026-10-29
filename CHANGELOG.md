@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v13.4.0+libresomnia.2 - 2026-10-29
+
+### Libresomnia 13.4.0 — build 2
+
+Based on upstream Kong/insomnia `core@13.4.0` (Apache-2.0). Cloud login, telemetry (Segment/Sentry/Customer.io) and auto-updates removed; local AI plugin included.
+
+#### Changes in this build
+
+- **Fixed: stale UI after an in-place update.** The renderer entry document (`index.html`) is served from the app bundle under a URL that is identical across builds and previously carried no cache headers, so Chromium kept serving the previous build's UI (e.g. version 13.3.1 shown after installing 13.4.0) until the whole config folder was deleted manually. Two fixes:
+  - `index.html` responses now carry `Cache-Control: no-store` (hashed asset files remain cacheable).
+  - On the first launch after the app bundle changed, the cache directories (`Cache`, `Code Cache`, `GPUCache`, …) are now removed synchronously before Chromium starts — the earlier `session.clearCache()` call ran too late to reliably evict memory-mapped entries. User data, database and plugins are untouched.
+  
+- Platforms: Linux x86_64 + aarch64 (rpm, AppImage, tar.gz), Windows x64 + arm64 (NSIS installer, zip), macOS arm64 (dmg, zip)
+- SHA256SUMS files are provided per OS and architecture
+
 ## v13.4.0+libresomnia.1 - 2026-10-29
 
 ### Libresomnia 13.4.0 — build 1
