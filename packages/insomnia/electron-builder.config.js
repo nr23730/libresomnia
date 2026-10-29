@@ -1,4 +1,4 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.4.0) - see README.md
 const BINARY_PREFIX = 'Libresomnia';
 // NOTE: USE_HARD_LINKS
 // https://github.com/electron-userland/electron-builder/issues/4594#issuecomment-574653870
@@ -204,7 +204,7 @@ const config = {
     // conflicts
     // --iteration = RPM release field; counts up with each libresomnia build
     // of the same upstream version (matches the v<ver>+libresomnia.N tag).
-    fpm: ['--rpm-rpmbuild-define=_build_id_links none', '--iteration', '5'],
+    fpm: ['--rpm-rpmbuild-define=_build_id_links none', '--iteration', '1'],
   },
   deb: {
     // same as rpm: package name shown by apt/dpkg (not currently a build target,

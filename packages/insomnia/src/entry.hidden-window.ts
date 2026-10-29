@@ -1,4 +1,4 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.4.0) - see README.md
 import * as Sentry from '@sentry/electron/renderer';
 import { SENTRY_OPTIONS } from 'insomnia/src/common/sentry';
 import { initServices } from 'insomnia-data';

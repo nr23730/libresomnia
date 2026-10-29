@@ -1,4 +1,4 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.4.0) - see README.md
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import { Button } from 'react-aria-components';
 import { useParams } from 'react-router';

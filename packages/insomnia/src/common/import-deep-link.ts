@@ -1,4 +1,4 @@
-// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.3.1) - see README.md
+// LOCAL BUILD: this file was modified relative to upstream Kong/insomnia (core@13.4.0) - see README.md
 import type { ImportSourceType } from './import';
 
 export interface ParsedDeepLink {
