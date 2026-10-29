@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v13.4.0+libresomnia.1 - 2026-10-29
+
+### Libresomnia 13.4.0 — build 1
+
+Based on upstream Kong/insomnia `core@13.4.0` (Apache-2.0). Cloud login, telemetry (Segment/Sentry/Customer.io) and auto-updates removed; local AI plugin included.
+
+#### Changes in this build
+
+- **New upstream base**: everything new in Insomnia 13.4.0, without any cloud dependencies.
+- All previous Libresomnia changes carried over: cloud-free local organization, Git sync enabled for local orgs, Cloud Sync option removed, owner-mandate banner fix, automatic cache clear after updates (no need to delete the config folder after an update).
+- Platforms: Linux x86_64 + aarch64 (rpm, AppImage, tar.gz), Windows x64 + arm64 (NSIS installer, zip), macOS arm64 (dmg, zip)
+- SHA256SUMS files are provided per OS and architecture
+
 ## v13.3.1+libresomnia.5 - 2026-10-23
 
 ### Libresomnia 13.3.1 — build 5
