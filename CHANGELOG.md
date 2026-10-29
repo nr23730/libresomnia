@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v13.4.0+libresomnia.3 - 2026-10-29
+
+### Libresomnia 13.4.0 — build 3
+
+Based on upstream Kong/insomnia `core@13.4.0` (Apache-2.0). Cloud login, telemetry (Segment/Sentry/Customer.io) and auto-updates removed; local AI plugin included.
+
+#### Changes in this build
+
+- **Fixed: automatic cache wipe targeted the wrong folder.** Build 2's startup cache maintenance ran before the custom userData path (`~/.config/Libresomnia`) was applied, so it cleared the default Electron directory instead and the stale UI could persist. The maintenance now runs right after the path override (still before Chromium starts), so the first launch after an update reliably clears `Cache`, `Code Cache`, `GPUCache`, `Shared Dictionary` and `blob_storage` inside the real userData folder — user data, database and plugins are untouched. Combined with the `Cache-Control: no-store` entry document from build 2, updates now apply without any manual cache deletion.
+- Platforms: Linux x86_64 + aarch64 (rpm, AppImage, tar.gz), Windows x64 + arm64 (NSIS installer, zip), macOS arm64 (dmg, zip)
+- SHA256SUMS files are provided per OS and architecture
+
 ## v13.4.0+libresomnia.1 - 2026-10-26
 
 ### Libresomnia 13.4.0 — build 1
